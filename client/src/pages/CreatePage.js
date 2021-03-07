@@ -1,6 +1,9 @@
-import React, {useState, useEffect,useContext} from 'react'
+import React, {useState, useEffect, useContext, Fragment} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {AuthContext} from "../context/AuthContex";
+import {Form_Newtask} from "../components/Form.js"
+import {List_Tasks} from "../components/List";
+
 
 export const CreatePage = () => {
     const auth = useContext(AuthContext)
@@ -12,31 +15,29 @@ export const CreatePage = () => {
     }, [])
     
     const pressHandler =  async event => {
-         if(event.key === 'Enter'){
-             try {
-                 const data = await request('/api/link/generate', 'POST', {from: link}, {
-                     Authorization: `Bearer ${auth.token}`
-                 })
-                 console.log(data)
-             } catch (e) {}
+          if(event.key === 'Enter') {
+              try {
+                  const data = await request('/api/link/make', 'POST', {from: link}, {
+                  Authorization: `Bearer ${auth.token}`
+                   })
+                  console.log(data)
+              } catch (e) {}
+
          }
     }
+
+    const tasks = new Array(3)
+        .fill('')
+        .map((_, i) => ({id: i, text: `Task_${i + 1}`}))
     
     return (
-        <div className="row">
-            <div className="col s8 offset-s2" style={ {paddingTop: '2rem'}}>
-                <div className="input-fied">
-                    <input
-                        placeholder="Enter your task"
-                        id="link"
-                        type="text"
-                        value={link}
-                        onChange={e =>setLink(e.target.value)}
-                        onKeyPress={pressHandler}
-                    />
-                    <label htmlFor="email">Input task/link</label>
-                </div>
-            </div>
-        </div>
+        <Fragment>
+            <Form_Newtask/>
+
+            <hr/>
+
+            <List_Tasks tasks={tasks}/>
+        </Fragment>
     )
 }
+

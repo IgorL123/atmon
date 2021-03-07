@@ -1,11 +1,29 @@
 const {Router} = require('express')
-const Link = require('../models/Link')
+const Task = require('../models/Task')
 const auth = require('../middleware/auth.middleware')
 const config = require('config')
 const router = Router()
 
+router.post('/make', auth, async (req,res) => {
+    try {
 
+        const {from} = req.body
 
+        const task = new Task({
+            text: from, owner: req.user.userId
+        })
+        console.log(task)
+
+        await task.save()
+        res.status(201).json({task})
+
+    } catch (e) {
+        res.status(500).json({message: 'Something go wrong...'})
+    }
+
+})
+
+/*
 router.post('/generate', auth, async (req,res) => {
     try {
         const baseUrl = config.get('baseUrl')
@@ -25,7 +43,7 @@ router.post('/generate', auth, async (req,res) => {
         res.status(500).json({message: 'Something go wrong...'})
     }
 
-})
+})  */
 
 router.get('/', auth, async (req,res) => {
     try {

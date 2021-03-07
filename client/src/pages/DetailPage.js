@@ -1,9 +1,10 @@
 import React from 'react'
 import {useParams} from 'react-router-dom'
 import {useHttp} from "../hooks/http.hook";
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthContex";
-import {useEffect} from "react/cjs/react.production.min";
+import {useContext} from "react/cjs/react.production.min";
+import {Loader} from "../components/Loader";
 
 
 export const DetailPage = () => {
