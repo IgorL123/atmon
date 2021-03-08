@@ -1,6 +1,13 @@
 import React from 'react'
 
+
 export const List_Tasks = ({tasks}) => {
+
+
+    if (!tasks.length){
+        return <p className="center"> No tasks already</p>
+    }
+
 
     return (
         <ul className="collection">
