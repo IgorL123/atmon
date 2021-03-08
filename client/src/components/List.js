@@ -1,13 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 
-export const List_Tasks = ({tasks}) => {
-
+export const ListTasks = ({tasks, deleteTask}) => {
+    const [clicks, setClicks] = useState(0)
 
     if (!tasks.length){
         return <p className="center"> No tasks already</p>
     }
-
 
     return (
         <ul className="collection">
@@ -18,17 +17,18 @@ export const List_Tasks = ({tasks}) => {
 
                     <div>
                         <strong> {task.text} </strong>
-                        <small>{new Date().toLocaleDateString()}</small>
+                        <small>{ task.date}</small>
                     </div>
 
                     <a
                         className="waves-effect waves-red btn-flat"
+                        onClick={() => {
+                            deleteTask(task._id)
+                        }}
                     >Delete
                     </a>
-
                 </li>
             ))}
-
         </ul>
     )
 }

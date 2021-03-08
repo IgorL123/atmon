@@ -3,10 +3,12 @@ import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/AuthContex";
 
 
-export const Form_Newtask = () => {
-    const auth = useContext(AuthContext)
+export const FormNewTask = ({saveTask}) => {
     const [value, setValue] = useState('')
     const {request} = useHttp()
+    const auth = useContext(AuthContext)
+
+
 
     const pressHandler =  async event => {
         if (event.key === 'Enter') {
@@ -21,7 +23,7 @@ export const Form_Newtask = () => {
 
     const submitHandler = event => {
         event.preventDefault()
-
+        saveTask(value)
 
         if (value.trim()) {
             setValue('')

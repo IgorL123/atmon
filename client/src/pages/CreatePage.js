@@ -1,9 +1,9 @@
 import React, {useState, useCallback, useEffect, useContext, Fragment} from 'react'
 import {useHttp} from '../hooks/http.hook'
-import {AuthContext} from "../context/AuthContex";
-import {Form_Newtask} from "../components/Form.js"
-import {List_Tasks} from "../components/List";
-import {Loader} from "../components/Loader";
+import {AuthContext} from "../context/AuthContex"
+import {FormNewTask} from "../components/Form.js"
+import {ListTasks} from "../components/List"
+import {Loader} from "../components/Loader"
 
 
 
@@ -22,26 +22,44 @@ export const CreatePage = () => {
         } catch (e) {}
     }, [token, request])
 
+    const deleteTask = useCallback(async (index) => {
+        try {
+            const deleted = await request('/api/link/delete', 'POST', {index},
+                {
+                    Authorization: `Bearer ${token}`
+                })
+        } catch (e) {}
+    }, [token, request])
+
+
     useEffect(() => {
         fetchTasks()
     }, [fetchTasks])
 
+    /*  Работает как говно
     if (loading) {
-        return <Loader/>
+        return (
+            <Loader/>
+            )
     }
+     */
 
-
-    /* const task = new Array(3)
-        .fill('')
-        .map((_, i) => ({id: i, text: `Task_${i + 1}`})) */
-    
     return (
         <Fragment>
-            <Form_Newtask/>
+            <FormNewTask
+                saveTask={ () => fetchTasks() }
+            />
+            <div>
+                {}
+            </div>
+
 
             <hr/>
             <>
-                {!loading && <List_Tasks tasks={tasks}/>}
+                    <ListTasks
+                        tasks={tasks}
+                        deleteTask={ (id) => {deleteTask(id); fetchTasks()}}
+                    />
             </>
 
         </Fragment>
