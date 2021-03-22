@@ -38,7 +38,7 @@ router.post(
 
         await user.save()
 
-        res.status(201).json({message: 'User created'})
+        res.status(201).json({message: 'User was created'})
 
 
     } catch (e) {

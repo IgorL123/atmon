@@ -15,7 +15,7 @@ export const AuthPage = () => {
     useEffect( () => {
         message(error)
         clearError()
-    }, [error, message, clearError])
+    }, [error, message, clearError]);
 
      useEffect(() => {
         window.M.updateTextFields()
