@@ -31,13 +31,11 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
 
 
   const changeHandler = event => {
-    console.log("FORM: ", form, "TG", event.target);
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
   const registerHandler = async () => {
     try {
-      console.log("data", form, " | ", form);
       const data = await request('/api/auth/register',
         'POST',
         {...form})
@@ -48,7 +46,6 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
   }
 
   const loginHandler = async () => {
-    console.log("data", form, " | ", form);
     try {
       const data = await request('/api/auth/login',
         'POST',
@@ -67,13 +64,11 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     if (type === "signIn") {
       authSpanToChange.innerHTML  = "Sing In to Get Started";
       signUpInButton.innerHTML    = "Sign In";
-      signUpInButton.onclick      = loginHandler;
       switchAuthButton.innerHTML  = "Not a member yet? Sign up for free";
       switchAuthButton.className  = "singInButton";
     } else if (type === "signUp") {
       authSpanToChange.innerHTML  = "Sing Up to Get Started";
       signUpInButton.innerHTML    = "Sign Up";
-      signUpInButton.onclick      = registerHandler;
       switchAuthButton.innerHTML  = "Have an account? Cick to sign in";
       switchAuthButton.className  = "singUpButton";
     }
@@ -81,8 +76,14 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
 
 
   useEffect(() => {
-    console.log(form);
-  }, [form]);
+    const type              = authType;
+    const signUpInButton    = document.getElementById("signUpInButton");
+    if (type === "signIn") {
+      signUpInButton.onclick      = loginHandler;
+    } else if (type === "signUp") {
+      signUpInButton.onclick      = registerHandler;
+    }
+  }, [authType, form])
 
   return (
 
