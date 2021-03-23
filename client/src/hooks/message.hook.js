@@ -2,8 +2,12 @@ import {useCallback} from 'react'
 
 export const useMessage = () => {
     return useCallback( text => {
-        if (window.M && text) {
-            window.M.toast({html: text})
+        const authErrorMessage = document.getElementById("authErrorMessage");
+        if (text) {
+            authErrorMessage.style.visibility   = "visible";
+            authErrorMessage.innerHTML          = text;
+        } else {
+            authErrorMessage.style.visibility   = "hiden";
         }
     }, [ ])
 }
