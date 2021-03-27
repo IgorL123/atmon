@@ -12,7 +12,7 @@ export const MainPage = () => {
       <header>
         <NewNavBar />
       </header>
-      <main>
+      <main className="startMain">
         <MainPageMain />
       </main>
     </div>

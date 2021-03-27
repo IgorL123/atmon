@@ -5,7 +5,7 @@ const schema = new Schema({
     from: {type: String, required: true},
     to: {type: String, required:true, unique: true},
     code: {type: String, required:true, unique: true},
-    date: {type: String, default: Date.now},
+    date: {type: String, default: Date.now},    // type String or Object ?
     clicks: {type: Number, default: 0},
     owner: {type: Types.ObjectId, ref: 'User'}
 })

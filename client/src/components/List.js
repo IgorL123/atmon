@@ -8,25 +8,50 @@ export const ListTasks = ({tasks, deleteTask}) => {
         return <p className="center"> No tasks already</p>
     }
 
+    let normalizeDate = (mydate) => {
+        let myDateObject = new Date(mydate);
+
+    let dd = myDateObject.getDate();
+    let mm = myDateObject.getMonth();
+    let yyyy = myDateObject.getFullYear();
+    return mm + '.' + dd + '.' + yyyy;  // Date format: 2.27.2020
+    }
+
+
+
     return (
         <ul className="collection">
             {tasks.map(task => (
                 <li
-                    className="collection-item note"
+                    className="item"
                     key={task.id}>
-
-                    <div>
-                        <strong> {task.text} </strong>
-                        <small>{ task.date}</small>
+                    <div className="oneTask">
+                        <span className="taskTitle"> {task.text} </span>
+                        <span className="taskDate">{ normalizeDate(task.date) }</span>
+                    </div>
+                    <div className="itemMenu">
+                        <div className="innerMenu">
+                            <button
+                              className="itemMenuButton"
+                              onClick={(event) => {
+                                  event.preventDefault();
+                                  console.log("ok", task._id);
+                                  deleteTask(task._id)
+                              }}
+                            >
+                                <div>...</div>
+                            </button>
+                        </div>
                     </div>
 
-                    <a
-                        className="waves-effect waves-red btn-flat"
-                        onClick={() => {
-                            deleteTask(task._id)
-                        }}
-                    >Delete
-                    </a>
+                    {/*<button*/}
+                    {/*    className="waves-effect waves-red btn-flat"*/}
+                    {/*    onClick={(event) => {*/}
+                    {/*        event.preventDefault();*/}
+                    {/*        deleteTask(task._id)*/}
+                    {/*    }}*/}
+                    {/*>Delete*/}
+                    {/*</button>*/}
                 </li>
             ))}
         </ul>

@@ -16,7 +16,6 @@ export const FormNewTask = ({saveTask}) => {
                 const data = await request('/api/link/make', 'POST',{
                     from: value
                 }, {Authorization: `Bearer ${auth.token}` })
-
             } catch (e) {}
         }
     }
@@ -35,7 +34,12 @@ export const FormNewTask = ({saveTask}) => {
             onSubmit={submitHandler}
             >
                 <div className="row">
-                    <div className="input-field col s6">
+                    <div className="">
+                        <label
+                          className="active"
+                          htmlFor="input_text">
+                            Input new task
+                        </label>
                         <input
                             value={value}
                             id="input_text"
@@ -44,11 +48,6 @@ export const FormNewTask = ({saveTask}) => {
                             onChange={ e => {setValue(e.target.value)}}
                             onKeyPress={pressHandler}
                         />
-                            <label
-                                className="active"
-                                htmlFor="input_text">
-                                Input new task
-                            </label>
                     </div>
             </div>
         </form>

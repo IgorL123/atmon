@@ -4,6 +4,7 @@ import {AuthContext} from "../context/AuthContex"
 import {FormNewTask} from "../components/Form.js"
 import {ListTasks} from "../components/List"
 import {Loader} from "../components/Loader"
+import {Navbar} from "../components/Navbar"
 
 
 
@@ -11,7 +12,7 @@ export const CreatePage = () => {
     const {token} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [tasks, setTasks] = useState([])
-    
+
     const fetchTasks = useCallback(async () => {
         try {
             const fetched = await request('/api/link', 'GET', null,
@@ -45,24 +46,29 @@ export const CreatePage = () => {
      */
 
     return (
+      <main className="mainApp">
+        <Navbar />
         <Fragment>
-            <FormNewTask
-                saveTask={ () => fetchTasks() }
-            />
-            <div>
-                {}
+            <div className="sectionContainer">
+                <section className="mainSection">
+                    <section className="tasksMain">
+                        <section className="taskList">
+                            <FormNewTask
+                              saveTask={ () => fetchTasks() }
+                            />
+                            <ListTasks
+                              tasks={tasks}
+                              deleteTask={ (id) => {deleteTask(id); fetchTasks()}}
+                            />
+                        </section>
+                    </section>
+                    <aside className="asideMenu">
+
+                    </aside>
+                </section>
             </div>
-
-
-            <hr/>
-            <>
-                    <ListTasks
-                        tasks={tasks}
-                        deleteTask={ (id) => {deleteTask(id); fetchTasks()}}
-                    />
-            </>
-
         </Fragment>
+      </main>
     )
 }
 
