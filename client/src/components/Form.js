@@ -3,13 +3,13 @@ import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/AuthContex";
 
 
-export const FormNewTask = ({saveTask}) => {
+export const FormNewTask = ({saveTask, createTask}) => {
     const [value, setValue] = useState('')
     const {request} = useHttp()
     const auth = useContext(AuthContext)
 
 
-
+    /*
     const pressHandler =  async event => {
         if (event.key === 'Enter') {
             try {
@@ -19,6 +19,8 @@ export const FormNewTask = ({saveTask}) => {
             } catch (e) {}
         }
     }
+    */
+
 
     const submitHandler = event => {
         event.preventDefault()
@@ -46,7 +48,7 @@ export const FormNewTask = ({saveTask}) => {
                             type="text"
                             className="validate"
                             onChange={ e => {setValue(e.target.value)}}
-                            onKeyPress={pressHandler}
+                            onKeyPress={event => {createTask(event.key , value)} }
                         />
                     </div>
             </div>

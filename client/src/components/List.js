@@ -20,6 +20,7 @@ export const ListTasks = ({tasks, deleteTask}) => {
 
 
     return (
+
         <ul className="collection">
             {tasks.map(task => (
                 <li
@@ -41,6 +42,11 @@ export const ListTasks = ({tasks, deleteTask}) => {
                             >
                                 <div>...</div>
                             </button>
+                            <div
+                            className="horizontal-dots"
+                            >
+
+                            </div>
                         </div>
                     </div>
 
@@ -55,5 +61,6 @@ export const ListTasks = ({tasks, deleteTask}) => {
                 </li>
             ))}
         </ul>
+
     )
 }

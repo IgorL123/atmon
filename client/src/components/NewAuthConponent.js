@@ -69,7 +69,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     } else if (type === "signUp") {
       authSpanToChange.innerHTML  = "Sing Up to Get Started";
       signUpInButton.innerHTML    = "Sign Up";
-      switchAuthButton.innerHTML  = "Have an account? Cick to sign in";
+      switchAuthButton.innerHTML  = "Have an account? Click to sign in";
       switchAuthButton.className  = "singUpButton";
     }
   }, [authType])

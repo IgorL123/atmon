@@ -7,10 +7,9 @@ const router = Router()
 router.post('/make', auth, async (req,res) => {
     try {
 
-        const {from} = req.body
 
         const task = new Task({
-            text: from, author: req.user.userId
+            text: req.body.value, author: req.user.userId
         })
 
         await task.save()
@@ -37,6 +36,7 @@ router.post('/delete', auth, async (req,res) => {
     try {
 
         const del = await Task.findByIdAndDelete(req.body.index)
+        res.json(del)
         res.status(201).json({message: 'Task deleted successfully'})
 
     } catch (e) {

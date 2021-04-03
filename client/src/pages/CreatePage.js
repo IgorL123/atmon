@@ -12,7 +12,8 @@ export const CreatePage = () => {
     const {token} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [tasks, setTasks] = useState([])
-
+    const [del, setDel] = useState([])
+    
     const fetchTasks = useCallback(async () => {
         try {
             const fetched = await request('/api/link', 'GET', null,
@@ -29,7 +30,19 @@ export const CreatePage = () => {
                 {
                     Authorization: `Bearer ${token}`
                 })
+            setDel(deleted)
         } catch (e) {}
+    }, [token, request])
+
+    const createTask = useCallback(async (event, value) => {
+        if (event === 'Enter') {
+            try {
+                console.log("1213")
+                const created = await request('/api/link/make', 'POST',{value},
+                    {Authorization: `Bearer ${token}` })
+                setTasks(...created)
+            } catch (e) {}
+        }
     }, [token, request])
 
 
@@ -54,11 +67,15 @@ export const CreatePage = () => {
                     <section className="tasksMain">
                         <section className="taskList">
                             <FormNewTask
-                              saveTask={ () => fetchTasks() }
+                              saveTask={ () => fetchTasks()}
+                              createTask={ (e, value) => createTask(e, value)}
                             />
                             <ListTasks
                               tasks={tasks}
-                              deleteTask={ (id) => {deleteTask(id); fetchTasks()}}
+                              deleteTask={ (id) => {
+                                  deleteTask(id)
+                                  fetchTasks()
+                              }}
                             />
                         </section>
                     </section>
