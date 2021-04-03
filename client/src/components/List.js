@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import "../button&menu.css"
 
 export const ListTasks = ({tasks, deleteTask}) => {
     const [clicks, setClicks] = useState(0)
@@ -30,7 +30,16 @@ export const ListTasks = ({tasks, deleteTask}) => {
                         <span className="taskTitle"> {task.text} </span>
                         <span className="taskDate">{ normalizeDate(task.date) }</span>
                     </div>
-                    <div className="itemMenu">
+
+                    <button className="closebutton"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                console.log("ok", task._id);
+                                deleteTask(task._id)
+                            }}
+                    >Delete</button>
+
+                    {/*<div className="itemMenu">}
                         <div className="innerMenu">
                             <button
                               className="itemMenuButton"
@@ -42,13 +51,10 @@ export const ListTasks = ({tasks, deleteTask}) => {
                             >
                                 <div>...</div>
                             </button>
-                            <div
-                            className="horizontal-dots"
-                            >
-
-                            </div>
                         </div>
-                    </div>
+                    </div>*/}
+
+
 
                     {/*<button*/}
                     {/*    className="waves-effect waves-red btn-flat"*/}

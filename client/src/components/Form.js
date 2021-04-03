@@ -48,7 +48,7 @@ export const FormNewTask = ({saveTask, createTask}) => {
                             type="text"
                             className="validate"
                             onChange={ e => {setValue(e.target.value)}}
-                            onKeyPress={event => {createTask(event.key , value)} }
+                            onKeyPress={event => {createTask(event.key, value)} }
                         />
                     </div>
             </div>
