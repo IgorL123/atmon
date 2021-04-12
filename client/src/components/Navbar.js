@@ -2,12 +2,11 @@ import React, {useContext} from 'react'
 import {NavLink, useHistory} from 'react-router-dom'
 import {AuthContext} from "../context/AuthContex";
 import {NewAuthComponent} from "./NewAuthConponent";
-import "../button&menu.css"
+import "../styles/button&menu.css"
 
 export const Navbar = () => {
     const history = useHistory()
     const auth = useContext(AuthContext)
-
 
 
     const logoutHandler = event => {
@@ -25,9 +24,9 @@ export const Navbar = () => {
 
 
             <ul>
-                <li><button className="SignIn" >Sign In</button></li>
-
+                <li><button className="SignIn" >Exit</button></li>
             </ul>
+
 
         </nav>
     )

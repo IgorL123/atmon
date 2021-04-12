@@ -4,6 +4,7 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
+const Desk = require('../models/Desk')
 const router = Router()
 
 // /api/auth/register
@@ -35,14 +36,18 @@ router.post(
 
         const hashedPassword = await bcrypt.hash(password, 12)
         const user = new User({email, password: hashedPassword })
-
         await user.save()
+
+        if (user){
+            const defaultDesk = new Desk({text: "default", author: user._id })
+            await defaultDesk.save()
+        }
 
         res.status(201).json({message: 'User was created'})
 
 
     } catch (e) {
-        res.status(500).json({message: 'Something go wrong...'})
+        res.status(500).json({message: `${e} Something go wrong...`})
     }
 })
 

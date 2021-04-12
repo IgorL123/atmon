@@ -148,8 +148,6 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
       </div>
 
     </section>
-
-
   );
 
 }

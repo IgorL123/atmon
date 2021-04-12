@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import "../button&menu.css"
+import "../styles/button&menu.css"
 
 export const ListTasks = ({tasks, deleteTask}) => {
     const [clicks, setClicks] = useState(0)
@@ -16,8 +16,6 @@ export const ListTasks = ({tasks, deleteTask}) => {
     let yyyy = myDateObject.getFullYear();
     return mm + '.' + dd + '.' + yyyy;  // Date format: 2.27.2020
     }
-
-
 
     return (
 

@@ -3,9 +3,9 @@ import {useHttp} from '../hooks/http.hook'
 import {AuthContext} from "../context/AuthContex"
 import {FormNewTask} from "../components/Form.js"
 import {ListTasks} from "../components/List"
-import {Loader} from "../components/Loader"
 import {Navbar} from "../components/Navbar"
-
+import {DeskList} from "../components/DeskList";
+import {FormDesk} from "../components/FormDesk";
 
 
 export const CreatePage = () => {
@@ -13,50 +13,70 @@ export const CreatePage = () => {
     const {request, loading} = useHttp()
     const [tasks, setTasks] = useState([])
     const [del, setDel] = useState([])
+    const [curDesk, setCurDesk] = useState("default")
+    const [desks, setDesks] = useState([])
     
-    const fetchTasks = useCallback(async () => {
+    const fetchTasks = useCallback(async (deskInfo) => {
         try {
-            const fetched = await request('/api/link', 'GET', null,
+            const fetched = await request('/api/link/get', 'POST', {deskInfo},
                 {
                     Authorization: `Bearer ${token}`
                 })
             setTasks(fetched)
-        } catch (e) {}
+        } catch (e) { console.log(`Error: ${e}`) }
     }, [token, request])
 
-    const deleteTask = useCallback(async (index) => {
+    const deleteTask = useCallback(async (index, deskInfo) => {
+        // нужно ускорить
         try {
-            const deleted = await request('/api/link/delete', 'POST', {index},
+            const deleted = await request('/api/link/delete', 'POST', {index, deskInfo},
                 {
                     Authorization: `Bearer ${token}`
                 })
             setDel(deleted)
-        } catch (e) {}
+        } catch (e) { console.log(`Error: ${e}`)}
     }, [token, request])
 
-    const createTask = useCallback(async (event, value) => {
+    const createTask = useCallback(async (event, value, deskInfo) => {
         if (event === 'Enter') {
             try {
-                console.log("1213")
-                const created = await request('/api/link/make', 'POST',{value},
+                const created = await request('/api/link/make', 'POST',{value, deskInfo},
                     {Authorization: `Bearer ${token}` })
                 setTasks(...created)
-            } catch (e) {}
+            } catch (e) { console.log(`Error: ${e}`)}
+        }
+    }, [token, request])
+
+    const fetchDesk = useCallback( async () => {
+        try {
+            const fetch = await request('/api/desk/getdesks', 'GET', null,
+                {Authorization: `Bearer ${token}` })
+            setDesks(fetch)
+        } catch (e) { console.log(`Error: ${e}`)}
+
+    }, [request, token])
+
+    const createDesk = useCallback(async (event, value) => {
+        if (event === 'Enter') {
+            try {
+                const created = await request('/api/desk/createdesk', 'POST', {value},
+                    {Authorization: `Bearer ${token}` })
+                setDesks(...created)
+            } catch (e) { console.log(`Error: ${e}`)}
         }
     }, [token, request])
 
 
     useEffect(() => {
-        fetchTasks()
+        fetchTasks("default")
     }, [fetchTasks])
 
-    /*  Работает как говно
-    if (loading) {
-        return (
-            <Loader/>
-            )
-    }
-     */
+    useEffect(() => {
+        fetchDesk()
+    }, [fetchDesk])
+
+
+
 
     return (
       <main className="mainApp">
@@ -67,19 +87,36 @@ export const CreatePage = () => {
                     <section className="tasksMain">
                         <section className="taskList">
                             <FormNewTask
-                              saveTask={ () => fetchTasks()}
-                              createTask={ (e, value) => createTask(e, value)}
+                              saveTask={ () => fetchTasks(curDesk)}
+                              createTask={ (e, value) => createTask(e, value, curDesk)}
                             />
+
                             <ListTasks
                               tasks={tasks}
                               deleteTask={ (id) => {
                                   deleteTask(id)
-                                  fetchTasks()
+                                  // Работает через раз хз почему
+                                  fetchTasks(curDesk)
                               }}
                             />
+
+
                         </section>
                     </section>
                     <aside className="asideMenu">
+                        <section className="deskList">
+                            <FormDesk
+                                saveDesk={ () => fetchDesk()}
+                                createDesk={ (e, value) => createDesk(e, value, curDesk)}
+                            />
+                            <DeskList
+                                desks={desks}
+                                setNewDesk={(board) => {
+                                    setCurDesk(board.text)
+                                    fetchTasks(curDesk)
+                                }}
+                            />
+                        </section>
 
                     </aside>
                 </section>

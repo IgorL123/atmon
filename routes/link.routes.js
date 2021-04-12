@@ -1,15 +1,13 @@
 const {Router} = require('express')
 const Task = require('../models/Task')
-const User = require('../models/User')
 const auth = require('../middleware/auth.middleware')
 const router = Router()
 
 router.post('/make', auth, async (req,res) => {
     try {
 
-
         const task = new Task({
-            text: req.body.value, author: req.user.userId
+            text: req.body.value, author: req.user.userId, desk: req.body.deskInfo
         })
 
         await task.save()
@@ -21,10 +19,9 @@ router.post('/make', auth, async (req,res) => {
 
 })
 
-router.get('/', auth, async (req,res) => {
+router.post('/get', auth, async (req,res) => {
     try {
-
-        const personal_tasks = await Task.find({author: req.user.userId})
+        const personal_tasks = await Task.find({author: req.user.userId, desk: req.body.deskInfo})
         res.json(personal_tasks)
 
     } catch (e) {
