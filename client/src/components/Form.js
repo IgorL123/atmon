@@ -36,11 +36,11 @@ export const FormNewTask = ({saveTask, createTask}) => {
             onSubmit={submitHandler}
             >
                 <div className="row">
-                    <div className="">
+                    <div className="addNew">
                         <label
                           className="active"
                           htmlFor="input_text">
-                            Input new task
+                            Input new task:
                         </label>
                         <input
                             value={value}

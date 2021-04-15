@@ -15,6 +15,7 @@ export const CreatePage = () => {
     const [del, setDel] = useState([])
     const [curDesk, setCurDesk] = useState("default")
     const [desks, setDesks] = useState([])
+    const [asideOpen, setAsideOpen] = useState(false);
     
     const fetchTasks = useCallback(async (deskInfo) => {
         try {
@@ -75,53 +76,72 @@ export const CreatePage = () => {
         fetchDesk()
     }, [fetchDesk])
 
+    function asideFunction(event) {
+        let neibor = event.target.nextSibling;
+        let mainPart = (document.getElementsByClassName("tasksMain"))[0];
+        let asidePart = (document.getElementsByClassName("asideMenu"))[0];
+        if (!asideOpen) {
+            asidePart.style.width = (parseInt(getComputedStyle(asidePart)["width"]) + 300) + "px";
+            mainPart.style.width = (parseInt(getComputedStyle(mainPart)["width"]) - 300) + "px";
+            neibor.style.width = 100 + "%";
+            neibor.style.visibility = "visible";
+            setAsideOpen(true);
+        } else {
+            asidePart.style.width = (parseInt(getComputedStyle(asidePart)["width"]) - 300) + "px";
+            mainPart.style.width = (parseInt(getComputedStyle(mainPart)["width"]) + 300) + "px";
+            neibor.style.width = 0;
+            neibor.style.visibility = "hidden";
+            setAsideOpen(false);
+        }
 
 
+
+    }
 
     return (
       <main className="mainApp">
-        <Navbar />
-        <Fragment>
-            <div className="sectionContainer">
-                <section className="mainSection">
-                    <section className="tasksMain">
-                        <section className="taskList">
-                            <FormNewTask
-                              saveTask={ () => fetchTasks(curDesk)}
-                              createTask={ (e, value) => createTask(e, value, curDesk)}
-                            />
+          <Navbar />
+          <Fragment>
+              <div className="sectionContainer">
+                  <section className="mainSection">
+                      <section className="tasksMain">
+                          <section className="taskList">
+                              <FormNewTask
+                                saveTask={ () => fetchTasks(curDesk)}
+                                createTask={ (e, value) => createTask(e, value, curDesk)}
+                              />
+                              <ListTasks
+                                tasks={tasks}
+                                deleteTask={ (id) => {
+                                    deleteTask(id)
+                                    // Работает через раз хз почему
+                                    fetchTasks(curDesk)
+                                }}
+                              />
+                          </section>
+                      </section>
+                      <aside className="asideMenu">
+                          <div className="asideButton" onClick={asideFunction}>
+                              +
+                          </div>
+                          <div className="asideForm">
 
-                            <ListTasks
-                              tasks={tasks}
-                              deleteTask={ (id) => {
-                                  deleteTask(id)
-                                  // Работает через раз хз почему
-                                  fetchTasks(curDesk)
-                              }}
-                            />
-
-
-                        </section>
-                    </section>
-                    <aside className="asideMenu">
-                        <section className="deskList">
-                            <FormDesk
+                              <FormDesk
                                 saveDesk={ () => fetchDesk()}
                                 createDesk={ (e, value) => createDesk(e, value, curDesk)}
-                            />
-                            <DeskList
+                              />
+                              <DeskList
                                 desks={desks}
                                 setNewDesk={(board) => {
                                     setCurDesk(board.text)
                                     fetchTasks(curDesk)
                                 }}
-                            />
-                        </section>
-
-                    </aside>
-                </section>
-            </div>
-        </Fragment>
+                              />
+                          </div>
+                      </aside>
+                  </section>
+              </div>
+          </Fragment>
       </main>
     )
 }

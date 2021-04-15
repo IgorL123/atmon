@@ -20,7 +20,7 @@ export const FormDesk = ({saveDesk, createDesk}) => {
             onSubmit={submitHandler}
         >
             <div className="row">
-                <div className="">
+                <div className="addNew">
                     <label
                         className="active"
                         htmlFor="input_text">

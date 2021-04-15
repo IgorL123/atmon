@@ -16,18 +16,22 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="NewNavBar">
-
-            <div className="logo">
-                <span>TODO</span>
-            </div>
-
-
-            <ul>
-                <li><button className="SignIn" >Exit</button></li>
-            </ul>
-
-
-        </nav>
+        // <nav className="NewNavBar">
+        //
+        //     <div className="logo">
+        //         <span>TODO</span>
+        //     </div>
+        //     <ul>
+        //         <li><button className="SignIn" >Exit</button></li>
+        //     </ul>
+        // </nav>
+      <nav className="appNavBar">
+        <span id="navLogo">Logo</span>
+        <ul id="nav-mobile" className="">
+          {/*<li><NavLink to="/create">To</NavLink></li>*/}
+          <li><a href="">LOL</a></li>
+          <li><a href="/" onClick={logoutHandler}>Exit</a></li>
+        </ul>
+      </nav>
     )
 }
