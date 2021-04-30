@@ -1,0 +1,1 @@
+To get first certificate use cert_default.conf from nginx and change --force-renewal to --staging  param in certbot command

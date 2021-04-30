@@ -1,0 +1,11 @@
+FROM node:12.0-alpine
+
+LABEL description="Development image for frontend"
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+CMD ["npm", "run", "start"]

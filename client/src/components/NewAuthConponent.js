@@ -5,11 +5,10 @@ import {AuthContext} from "../context/AuthContex";
 
 export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthType}) => {
 
-
-  var modal = document.getElementsByClassName('authorization')[0];
+  let modal = document.getElementsByClassName('authorization')[0];
 // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
       closeDisplay();
     }
   }

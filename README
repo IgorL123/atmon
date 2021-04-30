@@ -1,0 +1,5 @@
+To start app, you need to go to the development:  "cd development"
+next step is to run command: "docker-compose up"
+if you want to close everything, run command "docker-compose down" from the same directory
+
+Don't do this from production directory - that is only for server
