@@ -1,23 +1,30 @@
-import React, {useState,useEffect, useContext} from 'react'
+import React, {useState,useEffect} from 'react'
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
-import {AuthContext} from "../context/AuthContex";
+import {useDispatch, useSelector} from "react-redux";
+import {connect} from "react-redux"
+import {signup, login, logout } from "../actions/authAction";
+import {Redirect} from "react-router-dom";
 
 export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthType}) => {
+
+  const dispatch = useDispatch()
+  const fAuth = useSelector(state => state)
+
 
   let modal = document.getElementsByClassName('authorization')[0];
 // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
-    if (event.target === modal) {
+    if (event.target == modal) {
       closeDisplay();
     }
   }
 
   // Auth
 
-  const auth = useContext(AuthContext);
   const message = useMessage();
-  const {loading, request, error, clearError} = useHttp();
+  const {loading, error, clearError} = useHttp();
+
   const [form, setForm] = useState({
     email: '', password: ''
   });
@@ -28,32 +35,32 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
   }, [error, message, clearError]);
 
 
-
   const changeHandler = event => {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
   const registerHandler = async () => {
     try {
-      const data = await request('/api/auth/register',
-        'POST',
-        {...form})
-      message(data.message);
+      await dispatch(signup(form))
     } catch (e) {
-      console.log("reg", e.message);
+      console.log(e)
     }
   }
 
   const loginHandler = async () => {
     try {
-      const data = await request('/api/auth/login',
-        'POST',
-        {...form})
-      auth.login(data.token, data.userId);
+      await dispatch(login(form))
     } catch (e) {
-      console.log("login", e.message);
+    console.log(e)
     }
+
+    if (fAuth.isAuthenticated){
+      return (<Redirect to="/create" />)
+    }
+
   }
+
+
 
   useEffect(() => {
     const type = authType;
@@ -83,6 +90,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
       signUpInButton.onclick      = registerHandler;
     }
   }, [authType, form])
+
 
   return (
 
@@ -150,3 +158,11 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
   );
 
 }
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+})
+const mapDispatchToProps = dispatch => ({
+  login, logout, signup: signup, dispatch
+})
+export default connect(mapStateToProps, mapDispatchToProps)(NewAuthComponent)

@@ -3,11 +3,11 @@ const Task = require('../models/Task')
 const auth = require('../middleware/auth.middleware')
 const router = Router()
 
-router.post('/make', auth, async (req,res) => {
+router.post('/make', async (req,res) => {
     try {
 
         const task = new Task({
-            text: req.body.value, author: req.user.userId, desk: req.body.deskInfo
+            text: req.body.value, author: req.body.userId, desk: req.body.deskInfo
         })
 
         await task.save()
@@ -19,9 +19,9 @@ router.post('/make', auth, async (req,res) => {
 
 })
 
-router.post('/get', auth, async (req,res) => {
+router.post('/get', async (req,res) => {
     try {
-        const personal_tasks = await Task.find({author: req.user.userId, desk: req.body.deskInfo})
+        const personal_tasks = await Task.find({author: req.body.userId, desk: req.body.deskInfo})
         res.json(personal_tasks)
 
     } catch (e) {
@@ -29,7 +29,7 @@ router.post('/get', auth, async (req,res) => {
     }
 })
 
-router.post('/delete', auth, async (req,res) => {
+router.post('/delete', async (req,res) => {
     try {
 
         const del = await Task.findByIdAndDelete(req.body.index)
@@ -41,7 +41,7 @@ router.post('/delete', auth, async (req,res) => {
     }
 })
 
-router.post('/edit', auth, async (req,res) => {
+router.post('/edit', async (req,res) => {
     try {
 
         //const edit = await Task.findByIdAndUpdate(req.body.index, {req.body.newtext})

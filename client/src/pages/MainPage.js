@@ -3,14 +3,13 @@ import {NewNavBar} from '../components/NewNavBar'
 import {MainPageMain} from "../components/MainPageMain"
 
 
+
 export const MainPage = () => {
-
-
 
   return (
     <div className="page">
       <header>
-        <NewNavBar />
+        <NewNavBar/>
       </header>
       <main className="startMain">
         <MainPageMain />

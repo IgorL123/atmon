@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {NewAuthComponent} from "./NewAuthConponent"
 
 export const NewNavBar = () => {
   const [display, setDisplay] = useState("none");
   const [authType, setAuthType] = useState(null);
-
 
 
   const changeAuthType = (event) => {

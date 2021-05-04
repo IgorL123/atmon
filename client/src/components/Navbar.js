@@ -1,30 +1,25 @@
-import React, {useContext} from 'react'
-import {NavLink, useHistory} from 'react-router-dom'
-import {AuthContext} from "../context/AuthContex";
+import React from 'react'
 import {NewAuthComponent} from "./NewAuthConponent";
 import "../styles/button&menu.css"
+import {logout} from "../actions/authAction";
+import {connect, useDispatch} from "react-redux";
 
 export const Navbar = () => {
-    const history = useHistory()
-    const auth = useContext(AuthContext)
+
+    const dispatch = useDispatch()
 
 
     const logoutHandler = event => {
         event.preventDefault()
-        auth.logout()
-        history.push('/')
+
+        try {
+            dispatch(logout())
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
-        // <nav className="NewNavBar">
-        //
-        //     <div className="logo">
-        //         <span>TODO</span>
-        //     </div>
-        //     <ul>
-        //         <li><button className="SignIn" >Exit</button></li>
-        //     </ul>
-        // </nav>
       <nav className="appNavBar">
         <span id="navLogo">Logo</span>
         <ul id="nav-mobile" className="">
@@ -35,3 +30,9 @@ export const Navbar = () => {
       </nav>
     )
 }
+
+const mapStateToProps = (state) => ({})
+const mapDispatchToProps = dispatch => ({
+    logout, dispatch
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

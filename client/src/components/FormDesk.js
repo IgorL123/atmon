@@ -3,16 +3,21 @@ import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/AuthContex";
 
 
-export const FormDesk = ({saveDesk, createDesk}) => {
+export const FormDesk = ({createNewDesk}) => {
     const [value, setValue] = useState('')
 
     const submitHandler = event => {
         event.preventDefault()
-        saveDesk(value)
 
         if (value.trim()) {
             setValue('')
         }
+    }
+    const createHandler = async (event) => {
+        if (event === 'Enter'){
+            createNewDesk(value)
+        }
+
     }
 
     return (
@@ -32,7 +37,7 @@ export const FormDesk = ({saveDesk, createDesk}) => {
                         type="text"
                         className="validate"
                         onChange={ e => {setValue(e.target.value)}}
-                        onKeyPress={event => {createDesk(event.key, value)} }
+                        onKeyPress={e => createHandler(e)}
                     />
                 </div>
             </div>

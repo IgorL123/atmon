@@ -5,10 +5,10 @@ const auth = require('../middleware/auth.middleware')
 
 // /api/desk/...
 
-router.get('/getdesks', auth, async (req,res) => {
+router.get('/getdesks', async (req,res) => {
     try {
 
-        let desks = await Desk.find({author: req.user.userId})
+        let desks = await Desk.find({author: req.body.userId})
         res.json(desks)
 
     } catch (e) {
@@ -17,11 +17,11 @@ router.get('/getdesks', auth, async (req,res) => {
 })
 
 
-router.post('/createdesk', auth, async (req,res) => {
+router.post('/createdesk', async (req,res) => {
     try {
 
         const desk = new Desk({
-            text: req.body.value, author: req.user.userId
+            text: req.body.value, author: req.body.userId
         })
 
         await desk.save()
@@ -32,7 +32,7 @@ router.post('/createdesk', auth, async (req,res) => {
     }
 })
 
-router.post('/deletedesk', auth, async (req,res) => {
+router.post('/deletedesk', async (req,res) => {
     try {
 
         const del = await Desk.findByIdAndDelete(req.body.index)

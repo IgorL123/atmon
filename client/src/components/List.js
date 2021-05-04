@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import "../styles/button&menu.css"
 
+
 export const ListTasks = ({tasks, deleteTask}) => {
-    const [clicks, setClicks] = useState(0)
 
     if (!tasks.length){
         return <p className="center"> No tasks already</p>
@@ -10,11 +10,20 @@ export const ListTasks = ({tasks, deleteTask}) => {
 
     let normalizeDate = (mydate) => {
         let myDateObject = new Date(mydate);
+        let dd = myDateObject.getDate();
+        let mm = myDateObject.getMonth();
+        let yyyy = myDateObject.getFullYear();
+        return mm + '.' + dd + '.' + yyyy;  // Date format: 2.27.2020
+    }
+    const normDate = (prevDate) => {
+        const date = new Date(prevDate)
+        return date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear()
+    }
 
-    let dd = myDateObject.getDate();
-    let mm = myDateObject.getMonth();
-    let yyyy = myDateObject.getFullYear();
-    return mm + '.' + dd + '.' + yyyy;  // Date format: 2.27.2020
+    const deleteHandler = async (event, taskId) => {
+        event.preventDefault()
+        deleteTask(taskId)
+
     }
 
     return (
@@ -23,45 +32,16 @@ export const ListTasks = ({tasks, deleteTask}) => {
             {tasks.map(task => (
                 <li
                     className="item"
-                    key={task.id}>
+                    key={task._id}>
                     <div className="oneTask">
-                        <span className="taskTitle"> {task.text} </span>
-                        <span className="taskDate">{ normalizeDate(task.date) }</span>
+                        <span className="taskTitle" > {task.text} </span>
+                        <span className="taskDate">{ normDate(task.date) }</span>
                     </div>
 
                     <button className="closebutton"
-                            onClick={(event) => {
-                                event.preventDefault();
-                                console.log("ok", task._id);
-                                deleteTask(task._id)
-                            }}
+                            onClick={(event) => deleteHandler(event, task._id)}
                     >Delete</button>
 
-                    {/*<div className="itemMenu">}
-                        <div className="innerMenu">
-                            <button
-                              className="itemMenuButton"
-                              onClick={(event) => {
-                                  event.preventDefault();
-                                  console.log("ok", task._id);
-                                  deleteTask(task._id)
-                              }}
-                            >
-                                <div>...</div>
-                            </button>
-                        </div>
-                    </div>*/}
-
-
-
-                    {/*<button*/}
-                    {/*    className="waves-effect waves-red btn-flat"*/}
-                    {/*    onClick={(event) => {*/}
-                    {/*        event.preventDefault();*/}
-                    {/*        deleteTask(task._id)*/}
-                    {/*    }}*/}
-                    {/*>Delete*/}
-                    {/*</button>*/}
                 </li>
             ))}
         </ul>

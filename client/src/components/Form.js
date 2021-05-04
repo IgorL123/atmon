@@ -1,33 +1,22 @@
-import React, {useState, useContext} from 'react'
-import {useHttp} from "../hooks/http.hook";
-import {AuthContext} from "../context/AuthContex";
+import React, {useState} from 'react'
 
 
-export const FormNewTask = ({saveTask, createTask}) => {
+export const FormNewTask = ({createTask}) => {
     const [value, setValue] = useState('')
-    const {request} = useHttp()
-    const auth = useContext(AuthContext)
-
-
-    /*
-    const pressHandler =  async event => {
-        if (event.key === 'Enter') {
-            try {
-                const data = await request('/api/link/make', 'POST',{
-                    from: value
-                }, {Authorization: `Bearer ${auth.token}` })
-            } catch (e) {}
-        }
-    }
-    */
-
 
     const submitHandler = event => {
         event.preventDefault()
-        saveTask(value)
 
         if (value.trim()) {
             setValue('')
+        }
+    }
+
+    const createHandler = async (e) => {
+        if (e.key === 'Enter'){
+            try{
+                createTask(value)
+            } catch (e) {console.log(e)}
         }
     }
 
@@ -48,7 +37,7 @@ export const FormNewTask = ({saveTask, createTask}) => {
                             type="text"
                             className="validate"
                             onChange={ e => {setValue(e.target.value)}}
-                            onKeyPress={event => {createTask(event.key, value)} }
+                            onKeyPress={e => createHandler(e)}
                         />
                     </div>
             </div>
