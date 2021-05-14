@@ -31,7 +31,7 @@ export const login = (form) =>  async dispatch => {
         })
 
     } catch (e) {
-        console.log(e.message)
+        console.log(e)
         dispatch({
             type: LOGIN_FAIL,
 

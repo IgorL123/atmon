@@ -1,14 +1,13 @@
 import React, {Fragment} from 'react'
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
-import {useAuth} from "./hooks/auth.hook";
+import {useAuth} from "./hooks/auth.hook"
 import 'materialize-css'
-import {Loader} from "./components/Loader";
-import {MainPage} from "./pages/MainPage";
-import {CreatePage} from "./pages/CreatePage";
-import {NewNavBar} from "./components/NewNavBar";
-import {useSelector} from "react-redux";
-import {FormNewTask} from "./components/Form";
-import {ListTasks} from "./components/List";
+import {Loader} from "./components/Loader"
+import {MainPage} from "./pages/MainPage"
+import {CreatePage} from "./pages/CreatePage"
+import {useSelector} from "react-redux"
+import {FormNewTask} from "./components/Form"
+import {ListTasks} from "./components/List"
 
 
 

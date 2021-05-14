@@ -21,9 +21,10 @@ export const ListTasks = ({tasks, deleteTask}) => {
     }
 
     const deleteHandler = async (event, taskId) => {
-        event.preventDefault()
-        deleteTask(taskId)
-
+        //event.preventDefault()
+        try {
+            deleteTask(taskId)
+        } catch (e) { console.log(e) }
     }
 
     return (

@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json({ extended: true }))
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/link', require('./routes/link.routes'))
-app.use('/api/desk' , require('./routes/desk.auth'))
+app.use('/api/desk' , require('./routes/desk.routes'))
 
 
 

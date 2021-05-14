@@ -34,7 +34,7 @@ router.post('/delete', async (req,res) => {
 
         const del = await Task.findByIdAndDelete(req.body.index)
         res.json(del)
-        res.status(201).json({message: 'Task deleted successfully'})
+        //res.status(201).json({message: 'Task deleted successfully'})
 
     } catch (e) {
         res.status(500).json({message: 'Something go wrong...'})
