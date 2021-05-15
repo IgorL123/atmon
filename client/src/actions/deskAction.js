@@ -34,7 +34,7 @@ export const setDesk = (deskInfo) => async(dispatch) => {
     } catch (e) { console.log(e) }
 }
 
-export const createDesk= (value, userId) => async (dispatch) => {
+export const createDesk = (value, userId) => async (dispatch) => {
     try {
         const created = await axios.post('/api/desk/createdesk',{value, userId})
         dispatch({

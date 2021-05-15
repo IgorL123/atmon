@@ -1,11 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../styles/button&menu.css"
 
 
 export const ListTasks = ({tasks, deleteTask}) => {
+    const [completed, setCompleted] = useState([])
 
+    const sortCompleted = () => {
+
+    }
+    /*
     if (!tasks.length){
         return <p className="center"> No tasks already</p>
+    }
+     */
+    const completeHandler = async () => {
+
     }
 
     let normalizeDate = (mydate) => {
@@ -34,9 +43,11 @@ export const ListTasks = ({tasks, deleteTask}) => {
                 <li
                     className="item"
                     key={task._id}>
+                    <div className="buttonCheck">
+                    </div>
                     <div className="oneTask">
                         <span className="taskTitle" > {task.text} </span>
-                        <span className="taskDate">{ normDate(task.date) }</span>
+                        <span className="taskDate">{ }</span>
                     </div>
 
                     <button className="closebutton"

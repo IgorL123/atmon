@@ -6,7 +6,7 @@ import {
     GET_TASKS_FAIL,
     GET_TASKS_SUCCESS,
 } from "./types"
-import axios from "axios";
+import axios from "axios"
 
 
 export const fetchTask = (deskInfo, userId) => async (dispatch) => {
@@ -23,10 +23,9 @@ export const fetchTask = (deskInfo, userId) => async (dispatch) => {
     }
 }
 
-export const createTask1 = (value, deskInfo, userId) => async (dispatch) => {
+export const createTask1 = (value, deskInfo, userId, date) => async (dispatch) => {
     try {
-
-        const created = await axios.post('/api/link/make',{value, deskInfo, userId})
+        const created = await axios.post('/api/link/make',{value, deskInfo, userId, date})
         dispatch({
             type: CREATE_TASK_SUCCESS,
             newTask: created

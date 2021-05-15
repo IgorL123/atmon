@@ -1,13 +1,11 @@
-import React, {useState, useEffect, Fragment} from 'react'
-import {FormNewTask} from "../components/Form.js"
-import {ListTasks} from "../components/List"
+import React, {Fragment, useEffect, useState} from 'react'
 import {Navbar} from "../components/Navbar"
 import {DeskList} from "../components/DeskList"
-import {FormDesk} from "../components/FormDesk"
-import { fetchTask, createTask1, deleteTask1 } from "../actions/taskAction"
-import {fetchDesks, createDesk, setDesk, deleteDesk} from "../actions/deskAction";
+import {fetchTask, createTask1, deleteTask1} from "../actions/taskAction"
+import {createDesk, fetchDesks, setDesk} from "../actions/deskAction";
 import {useDispatch, useSelector} from 'react-redux'
-
+import {AddFormDesk} from "../components/AddFormDesk";
+import {ListWheel} from "../components/ListWheel";
 
 
 export const CreatePage = () => {
@@ -21,7 +19,7 @@ export const CreatePage = () => {
         dispatch(fetchDesks(userId))
     }, [fetchTask, fetchDesks, dispatch])
 
-    const task = useSelector(state => state.taskReducer.tasks)
+    let task = useSelector(state => state.taskReducer.tasks)
     const desk = useSelector(state => state.desk.desks)
 
     function asideFunction(event) {
@@ -41,7 +39,6 @@ export const CreatePage = () => {
             neibor.style.visibility = "hidden";
             setAsideOpen(false);
         }
-
     }
 
     return (
@@ -51,31 +48,23 @@ export const CreatePage = () => {
               <div className="sectionContainer">
                   <section className="mainSection">
                       <section className="tasksMain">
-                          <section className="taskList">
-                              <FormNewTask
+                          <ListWheel
+                          tasks={task}
+                          deleteTask={(id) => {
+                              dispatch(deleteTask1(id))
+                              dispatch(fetchTask(curDesk, userId))
+                          }}
+                          createTask={(value, date) => {
+                              dispatch(createTask1(value, curDesk, userId, date))
+                          }}>
 
-                                createTask={ (value) => {
-                                    dispatch(createTask1(value, curDesk, userId))
-                                }}
-                              />
-                              <ListTasks
-                                tasks={task}
-                                deleteTask={ (id) => {
-                                    dispatch(deleteTask1(id))
-                                    dispatch(fetchTask(curDesk, userId))
-                                }}
-                              />
-                          </section>
+                          </ListWheel>
                       </section>
                       <aside className="asideMenu">
                           <div className="asideButton" onClick={asideFunction}>
                               +
                           </div>
                           <div className="asideForm">
-
-                              <FormDesk
-                                createNewDesk={ (value) => dispatch(createDesk(value, userId))}
-                              />
                               <DeskList
                                 desks={desk}
                                 setNewDesk={(deskId,deskInf) => {
@@ -83,6 +72,9 @@ export const CreatePage = () => {
                                     dispatch(fetchTask(deskInf, userId))
                                 }}
                               />
+                              <AddFormDesk createNewDesk={ (value) => {
+                                  dispatch(createDesk(value, userId))
+                              }} />
                           </div>
                       </aside>
                   </section>

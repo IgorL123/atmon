@@ -1,0 +1,113 @@
+
+
+
+#myInput {
+    width: 100%;
+    padding: 8px 20px 8px 40px;
+    border: 1px solid #fff;
+    margin-bottom: 0;
+    border-radius: 10px;
+    font-size: 16px;
+    font-style: italic;
+
+    background-color: #fff;
+}
+
+#myInputDesk {
+    width: 100%;
+    padding: 2px 20px 2px 40px;
+    border: 1px solid #fff;
+    margin-bottom: 0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-style: italic;
+
+    background-color: #fff;
+}
+
+.column {
+    float: left;
+    width: 32%;
+    padding: 0 5px;
+}
+.row {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 100%
+
+}
+
+.upperPart {
+    margin-top: 3px;
+}
+.upperPart button{
+    background-color: #fff;
+    border: none;
+    border-radius: 100%;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-style: italic;
+    margin: 4px 2px;
+    curson: pointer;
+}
+.upperPart button:not(:last-child){
+    border-right: none;
+}
+.upperPart:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.upperPart button:hover {
+
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+.buttonSwitch{
+    background-color: #fff;
+    border: none;
+    border-radius: 100%;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-style: italic;
+    margin: 4px 2px;
+    vertical-align: top;
+}
+
+
+.buttonCheck {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: black;
+    padding: 5px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.buttonCheck:active {
+
+}

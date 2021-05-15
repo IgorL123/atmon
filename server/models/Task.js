@@ -5,6 +5,7 @@ const schema = new Schema({
     priority: {type: Number, default: 0 },
     date: {type: String, default:  new Date},
     desk: {type: String, required: true, default: 'default', ref: 'Desk'},
+    completed: {type:Boolean, default: false},
     author: {type: String, required: true, unique: true, ref: 'User'}
 })
 
