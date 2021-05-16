@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {ListTasks} from "./List";
 import {AddFormTask} from "./AddFormTask";
 
-export const ListWheel = ({tasks, deleteTask, createTask}) => {
+export const ListWheel = ({tasks, deleteTask, createTask, completeTask}) => {
     const [startDate, setDate] = useState( new Date() )
 
     useEffect(() => {
@@ -55,7 +55,9 @@ export const ListWheel = ({tasks, deleteTask, createTask}) => {
                 <section className="taskList" >
                     <ListTasks
                         tasks={sortTasksByDate(tasks, oneDate)}
-                        deleteTask={ deleteTask } />
+                        deleteTask={deleteTask}
+                        completeTask={completeTask}
+                    />
                     <AddFormTask createTask={createTask} date={oneDate} />
                 </section>
             </div>

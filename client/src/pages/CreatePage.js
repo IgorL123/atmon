@@ -1,8 +1,8 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {Navbar} from "../components/Navbar"
 import {DeskList} from "../components/DeskList"
-import {fetchTask, createTask1, deleteTask1} from "../actions/taskAction"
-import {createDesk, fetchDesks, setDesk} from "../actions/deskAction";
+import {fetchTask, createTask1, deleteTask1, completeTask} from "../actions/taskAction"
+import {createDesk, fetchDesks, setDesk, deleteDesk} from "../actions/deskAction";
 import {useDispatch, useSelector} from 'react-redux'
 import {AddFormDesk} from "../components/AddFormDesk";
 import {ListWheel} from "../components/ListWheel";
@@ -55,11 +55,12 @@ export const CreatePage = () => {
                           tasks={task}
                           deleteTask={(id) => {
                               dispatch(deleteTask1(id))
-                              dispatch(fetchTask(curDesk, userId))
+                              //dispatch(fetchTask(curDesk, userId))
                           }}
                           createTask={(value, date) => {
                               dispatch(createTask1(value, curDesk, userId, date))
-                          }}>
+                          }}
+                          completeTask={(id) => dispatch(completeTask(id))}>
 
                           </ListWheel>
                       </section>
@@ -74,6 +75,7 @@ export const CreatePage = () => {
                                     dispatch(setDesk(deskInf))
                                     dispatch(fetchTask(deskInf, userId))
                                 }}
+                                deleteDesk={ (index, deskInfo) => dispatch(deleteDesk(index, deskInfo))}
                               />
                               <AddFormDesk createNewDesk={ (value) => {
                                   dispatch(createDesk(value, userId))

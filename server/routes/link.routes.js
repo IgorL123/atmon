@@ -44,6 +44,16 @@ router.post('/delete', async (req,res) => {
     }
 })
 
+router.post('/complete', async (req,res) => {
+    try {
+        const completed = await Task.findOneAndUpdate({_id: req.body.index}, {$set:{completed: true}})
+        res.json(completed)
+
+    } catch (e) {
+        res.status(500).json({message: `Something go wrong...${e}`})
+    }
+})
+
 router.post('/edit', async (req,res) => {
     try {
 
@@ -54,6 +64,8 @@ router.post('/edit', async (req,res) => {
         res.status(500).json({message: 'Something go wrong...'})
     }
 })
+
+
 
 
 module.exports = router
