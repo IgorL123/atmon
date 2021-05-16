@@ -7,8 +7,8 @@ import {AuthPage} from "./pages/AuthPage";
 import {MainPage} from "./pages/MainPage"
 
 
-export const useRoutes = isAthenticated => {
-    if (isAthenticated){
+export const useRoutes = isAuthenticated => {
+    if (isAuthenticated){
         return (
             <Switch>
               <Route path="/links" exact>

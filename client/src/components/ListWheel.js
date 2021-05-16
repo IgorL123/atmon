@@ -36,23 +36,23 @@ export const ListWheel = ({tasks, deleteTask, createTask}) => {
     return (
     <div className="row">
         <div className="upperPart" >
-                    <button
-                    onClick={() => setDate(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 1))} >
-                        Prev
-                    </button>
-                    <button
-                    onClick={() => setDate(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 1))} >
-                        Next
-                    </button>
-                    <button
-                        onClick={() => setDate(new Date())} >
-                        Today
-                    </button>
+            <button
+                onClick={() => setDate(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 1))} >
+                Prev
+            </button>
+            <button
+                onClick={() => setDate(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 1))} >
+                Next
+            </button>
+            <button
+                onClick={() => setDate(new Date())} >
+                Today
+            </button>
         </div>
         { dateRange.map(oneDate => (
             <div className="column" key={oneDate*1}>
+                <h3> {prettyDate(oneDate)}</h3>
                 <section className="taskList" >
-                    <h3> {prettyDate(oneDate)}</h3>
                     <ListTasks
                         tasks={sortTasksByDate(tasks, oneDate)}
                         deleteTask={ deleteTask } />

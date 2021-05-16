@@ -23,9 +23,7 @@ export const Navbar = () => {
       <nav className="appNavBar">
         <span id="navLogo">Logo</span>
         <ul id="nav-mobile" className="">
-          {/*<li><NavLink to="/create">To</NavLink></li>*/}
-          <li><a href="">LOL</a></li>
-          <li><a href="/" onClick={logoutHandler}>Exit</a></li>
+          <li><button onClick={logoutHandler}>EXIT</button></li>
         </ul>
       </nav>
     )

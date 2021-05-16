@@ -54,6 +54,7 @@ export const ListTasks = ({tasks, deleteTask}) => {
                             onClick={(event) => deleteHandler(event, task._id)}
                     >Delete</button>
 
+
                 </li>
             ))}
         </ul>

@@ -26,17 +26,20 @@ export const CreatePage = () => {
         let neibor = event.target.nextSibling;
         let mainPart = (document.getElementsByClassName("tasksMain"))[0];
         let asidePart = (document.getElementsByClassName("asideMenu"))[0];
+        let deskTitle = document.getElementsByClassName("deskTitle");
+        console.log(deskTitle);
         if (!asideOpen) {
-            asidePart.style.width = (parseInt(getComputedStyle(asidePart)["width"]) + 300) + "px";
-            mainPart.style.width = (parseInt(getComputedStyle(mainPart)["width"]) - 300) + "px";
+            asidePart.style.width = `30%`;
+            mainPart.style.width = `calc(70% - 29px)`
             neibor.style.width = 100 + "%";
             neibor.style.visibility = "visible";
             setAsideOpen(true);
         } else {
-            asidePart.style.width = (parseInt(getComputedStyle(asidePart)["width"]) - 300) + "px";
-            mainPart.style.width = (parseInt(getComputedStyle(mainPart)["width"]) + 300) + "px";
+            asidePart.style.width = `50px`;
+            mainPart.style.width = `calc(100% - 29px - 50px)`;
             neibor.style.width = 0;
             neibor.style.visibility = "hidden";
+
             setAsideOpen(false);
         }
     }

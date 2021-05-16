@@ -80,10 +80,20 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     }
   }, [authType])
 
+  const onPressEnter = (e) => {
+    if (e.key === 'Enter'){
+      if(authType === "signIn") {
+        loginHandler();
+      } else {
+        registerHandler();
+      }
+    }
+  }
 
   useEffect(() => {
     const type              = authType;
     const signUpInButton    = document.getElementById("signUpInButton");
+
     if (type === "signIn") {
       signUpInButton.onclick      = loginHandler;
     } else if (type === "signUp") {
@@ -100,58 +110,58 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
         <div className="close">
           <button onClick={closeDisplay}>&times;</button>
         </div>
-              <div className="SignInForm">
+        <div className="SignInForm">
 
-                <span id="authSpanToChange">Sing Up/In to Get Started</span>
-
-
-                <div className="inputFields">
-
-                  <span id="authErrorMessage">Error</span>
-
-                  <label htmlFor="email">Email</label>
-                  <div className="input-field">
-                    <input
-                      id="email"
-                      type="text"
-                      name="email"
-                      value={form.email}
-                      onChange={changeHandler}
-                    />
-                  </div>
-
-                  <label htmlFor="email">Password</label>
-                  <div className="input-field">
-                    <input
-                      id="password"
-                      type="password"
-                      name="password"
-                      value={form.password}
-                      onChange={changeHandler}
-                    />
-                  </div>
-
-                  <div className="authButton">
-                    <button
-                      id="signUpInButton"
-                      disabled={loading}
-                      onClick={loginHandler}
-                    >
-                    </button>
-
-                    <div className="switchAuth">
-                      <button
-                        className=""
-                        id="switchAuthButton"
-                        onClick={changeAuthType}
-                      >
-                      </button>
-                    </div>
-                  </div>
+          <span id="authSpanToChange">Sing Up/In to Get Started</span>
 
 
-                </div>
+          <div className="inputFields">
+
+            <span id="authErrorMessage">Error</span>
+
+            <label htmlFor="email">Email</label>
+            <div className="input-field">
+              <input
+                  id="email"
+                  type="text"
+                  name="email"
+                  value={form.email}
+                  onChange={changeHandler}
+                  onKeyPress={onPressEnter}
+              />
+            </div>
+
+            <label htmlFor="email">Password</label>
+            <div className="input-field">
+              <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={form.password}
+                  onChange={changeHandler}
+                  onKeyPress={onPressEnter}
+              />
+            </div>
+
+            <div className="authButton">
+              <button
+                  id="signUpInButton"
+                  disabled={loading}
+                  onClick={loginHandler}
+              >
+              </button>
+
+              <div className="switchAuth">
+                <button
+                    className=""
+                    id="switchAuthButton"
+                    onClick={changeAuthType}
+                >
+                </button>
               </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section>

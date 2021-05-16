@@ -52,6 +52,7 @@
 
 div.page {
     background-color: #F4F5F9;
+    min-width: 250px;
 }
 
 
@@ -89,45 +90,44 @@ nav.NewNavBar ul {
 }
 
 nav.NewNavBar li {
-    /*padding: 10px 50px 10px 0;*/
     margin: 0 25px;
 }
 
-nav.NewNavBar a {
-    text-decoration: none;
-    color: inherit;
-    font-weight: 600;
-}
+/*nav.NewNavBar a {*/
+/*    text-decoration: none;*/
+/*    color: inherit;*/
+/*    font-weight: 600;*/
+/*}*/
 
-nav.NewNavBar a[href="/register"] {
-    padding: 15px 30px;
-    border: 1px solid transparent;
-    background-color: #fff;
-    border-radius: 30px;
-    color: #45AF61;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 30px -12px, rgba(0, 0, 0, 0.3) 0px 8px 18px -18px;
-    transition: 0.5s;
-}
+/*nav.NewNavBar a[href="/register"] {*/
+/*    padding: 15px 30px;*/
+/*    border: 1px solid transparent;*/
+/*    background-color: #fff;*/
+/*    border-radius: 30px;*/
+/*    color: #45AF61;*/
+/*    box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 30px -12px, rgba(0, 0, 0, 0.3) 0px 8px 18px -18px;*/
+/*    transition: 0.5s;*/
+/*}*/
 
-nav.NewNavBar a[href="/register"]:hover {
-    border: 1px solid #45AF61;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;
-    transition: 0.5s;
-}
+/*nav.NewNavBar a[href="/register"]:hover {*/
+/*    border: 1px solid #45AF61;*/
+/*    box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;*/
+/*    transition: 0.5s;*/
+/*}*/
 
-nav.NewNavBar a[href="/auth"] {
-    border: 1px solid transparent;
-    border-radius: 30px;
-    padding: 15px 30px;
-    transition: 0.5s;
-}
+/*nav.NewNavBar a[href="/auth"] {*/
+/*    border: 1px solid transparent;*/
+/*    border-radius: 30px;*/
+/*    padding: 15px 30px;*/
+/*    transition: 0.5s;*/
+/*}*/
 
-nav.NewNavBar a[href="/auth"]:hover {
-    border: 1px solid #45AF61;
-    background-color: #fff;
-    color: #45AF61;
-    transition: 0.5s;
-}
+/*nav.NewNavBar a[href="/auth"]:hover {*/
+/*    border: 1px solid #45AF61;*/
+/*    background-color: #fff;*/
+/*    color: #45AF61;*/
+/*    transition: 0.5s;*/
+/*}*/
 
 /*
     Buttons
@@ -138,13 +138,14 @@ nav.NewNavBar button {
     text-decoration: none;
     color: inherit;
     font-weight: 600;
+    /*font-size: 13.34px;*/
+    padding: 15px 30px;
+    border: 1px solid transparent;
 }
 
 
 
 nav.NewNavBar button.SignUp {
-    padding: 15px 30px;
-    border: 1px solid transparent;
     background-color: #fff;
     border-radius: 30px;
     color: #45AF61;
@@ -164,10 +165,8 @@ nav.NewNavBar button.SignUp:active {
 }
 
 nav.NewNavBar button.SignIn {
-    border: 1px solid transparent;
     background-color: #F4F5F9;
     border-radius: 30px;
-    padding: 15px 30px;
     transition: 0.5s;
 }
 
@@ -184,7 +183,52 @@ nav.NewNavBar button.SignIn:active {
     transition: 0.5s;
 }
 
+/*
+    Responsive NavBar
+ */
 
+@media screen and (max-width: 600px) {
+    nav.NewNavBar {
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        color: #3C3F48;
+
+    }
+
+    nav.NewNavBar .logo {
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+    }
+
+    nav.NewNavBar li {
+        margin: 0 5px;
+    }
+
+    nav.NewNavBar .logo span {
+        font-size: 16px;
+    }
+
+    nav.NewNavBar ul {
+        margin: 0 0px;
+    }
+
+    nav.NewNavBar button {
+        padding: 8px 12px;
+        font-size: 10px;
+        /*border: 1px solid transparent;*/
+    }
+
+    nav.NewNavBar button.SignUp {
+        background-color: transparent;
+        border: none;
+        color: #45AF61;
+        box-shadow: none;
+        transition: 0.5s;
+    }
+}
 
 /*
     MainPageMain
@@ -198,9 +242,9 @@ main.startMain {
 
 main.startMain section {
     padding: 40px 0;
-    min-width: 400px;
-    width: 50%;
+    width: 60%;
     text-align: center;
+    min-width: 450px;
 }
 
 main.startMain section h1 {
@@ -229,30 +273,27 @@ main.startMain section ul.links li {
     margin: 0 10px;
 }
 
-
-
-main.startMain section ul.links li a {
+main.startMain section ul.links li a, main.startMain section ul.links li button {
     display: block;
     border: 1px solid transparent;
     border-radius: 30px;
 }
 
-main.startMain section ul.links li a[href="/getstarted"] {
+main.startMain section ul.links li button.getStarted {
+    width: 100%;
     font-size: 14px;
     padding: 15px 52px;
     background-color: #45AF61;
     color: #fff;
     transition: 0.5s;
+    outline: none;
 }
 
-main.startMain section ul.links li a[href="/getstarted"]:hover {
-    /*border: 1px solid #45AF61;*/
-    /*color: #45AF61;*/
-    /*transition: 0.5s;*/
+main.startMain section ul.links li button.getStarted:hover {
     background-color: #3d9d57;
 }
 
-main.startMain section ul.links li a[href="/discoverfeatures"] {
+main.startMain section ul.links li a[href="#discoverfeatures"] {
     font-size: 14px;
     padding: 15px 30px;
     background-color: #fff;
@@ -260,20 +301,47 @@ main.startMain section ul.links li a[href="/discoverfeatures"] {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 30px -12px, rgba(0, 0, 0, 0.3) 0px 8px 18px -18px;
     transition: 0.5s;
 }
-main.startMain section ul.links li a[href="/discoverfeatures"]:hover {
+main.startMain section ul.links li a[href="#discoverfeatures"]:hover {
     border: 1px solid #45AF61;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;
     transition: 0.5s;
 }
 
-main.startMain section ul.links li button {
-    display: block;
-    border: 1px solid transparent;
-    border-radius: 30px;
+/*main.startMain section ul.links li button {*/
+/*    display: block;*/
+/*    border: 1px solid transparent;*/
+/*    border-radius: 30px;*/
+/*}*/
+
+
+/*
+    Responsive section
+ */
+
+
+@media screen and (max-width: 600px) {
+    main.startMain section {
+        padding: 40px 19px;
+        width: 100%;
+        min-width: 0px;
+    }
+
+    main.startMain section h1 {
+        font-size: 24px;
+    }
+
+
 }
 
+@media screen and (max-width: 450px) {
+    main.startMain section ul.links {
+        display: block;
+    }
 
-
+    main.startMain section ul.links li {
+        margin-bottom: 10px;
+    }
+}
 
 
 
@@ -288,8 +356,8 @@ section.authorization {
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
@@ -298,10 +366,13 @@ section.authorization {
 }
 
 section.authorization .form {
-    margin: 5% auto;
+    display: block;
+    margin: calc(50vh - 200px) auto;
     background-color: #fff;
-    width: 30%;
+    width: 400px;
     height: 420px;
+    min-width: 250px;
+
 }
 
 .animate {
@@ -378,7 +449,7 @@ section.authorization .form .authButton button {
     background-color: #0069D9;
     margin-top: 20px;
     width: 100%;
-    height: 38px;
+    /*height: 38px;*/
     outline: none;
     transition: 0.5s;
 }
@@ -429,7 +500,6 @@ section.authorization .form .authButton .switchAuth button:hover {
 
 section.authorization .form .SignInForm {
     width: 100%;
-    height: 100%;
 }
 
 section.authorization .form .SignInForm span#authSpanToChange{
@@ -467,6 +537,17 @@ section.authorization .form .SignInForm .inputFields span#authErrorMessage {
     to {transform: scale(1)}
 }
 
+@media screen and (max-width: 600px) {
+
+    section.authorization .form {
+        display: block;
+        margin: 0;
+        background-color: #fff;
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
 
 /*
 
@@ -477,6 +558,7 @@ section.authorization .form .SignInForm .inputFields span#authErrorMessage {
 main.mainApp {
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
     /*background-color: #D7D7D7;*/
     background-color: #F4F5F9;
 }
@@ -510,9 +592,20 @@ main.mainApp nav.appNavBar ul li {
     align-items: center;
 }
 
-main.mainApp nav.appNavBar ul li a {
+main.mainApp nav.appNavBar ul li button {
     display: block;
-    padding: 5px 5px;
+    outline: none;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    background-color: #FF4545FF;
+    padding: 5px 20px;
+}
+
+main.mainApp nav.appNavBar ul li button:hover {
+    background-color: #d23939;
 }
 
 main.mainApp .sectionContainer {
@@ -605,8 +698,6 @@ main.mainApp section.mainSection .asideMenu .asideForm{
 main.mainApp section.mainSection .asideMenu.deskTitle {
     display: block;
     width: 100%;
-    word-break: break-word;
-
 }
 
 main.mainApp section.mainSection .asideMenu.deskTitle:hover{
@@ -615,12 +706,20 @@ main.mainApp section.mainSection .asideMenu.deskTitle:hover{
     color: white;
 }
 
+main.mainApp section.mainSection .asideMenu .asideForm span.deskTitle {
+    overflow: hidden;
+    word-break: unset;
+    cursor: pointer;
+    text-align: center;
+}
+
 /*
         LIST
  */
 
 main.mainApp section.tasksMain section.taskList {
     overflow-y: scroll;
+    height: 87%;
 }
 
 main.mainApp section.tasksMain section.taskList::-webkit-scrollbar {
@@ -706,4 +805,5 @@ main.mainApp section.mainSection ul li .innerMenu .itemMenuButton div {
 main.mainApp section.mainSection section.tasksMain .addNewTask {
     padding: 10px 0;
 }
+
 

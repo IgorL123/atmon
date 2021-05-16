@@ -15,8 +15,8 @@ export const MainPageMain = () => {
       </p>
 
       <ul className="links">
-        <li><a href="/getstarted">Get Started</a></li>
-        <li><a href="/discoverfeatures">Discover Features</a></li>
+        <li><button className="getStarted">Get Started</button></li>
+        <li><a href="#discoverfeatures">Discover Features</a></li>
       </ul>
 
     </section>

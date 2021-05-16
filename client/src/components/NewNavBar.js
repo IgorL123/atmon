@@ -41,9 +41,7 @@ export const NewNavBar = () => {
       </div>
 
       <ul>
-        {/*<li><a href="/auth">Sign In</a></li>*/}
         <li><button className="SignIn" onClick={openDisplaySignIn}>Sign In</button></li>
-        {/*<li><a href="/register">Sign Up</a></li>*/}
         <li><button className="SignUp" onClick={openDisplaySignUp}>Sign Up</button></li>
       </ul>
       <NewAuthComponent display={display} closeDisplay={closeDisplay} authType={authType} changeAuthType={changeAuthType}/>
