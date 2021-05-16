@@ -1,5 +1,6 @@
 const {Router} = require('express')
 const Desk = require('../models/Desk')
+const Task = require('../models/Task')
 const router = Router()
 const auth = require('../middleware/auth.middleware')
 
@@ -34,13 +35,13 @@ router.post('/createdesk', async (req,res) => {
 
 router.post('/deletedesk', async (req,res) => {
     try {
-
-        const del = await Desk.findByIdAndDelete(req.body.index)
-        res.json(del)
-        res.status(201).json({message: 'Desk deleted successfully'})
+        const del1 = await Desk.findByIdAndDelete(req.body.index)
+        const del2 = await Task.deleteMany({desk: req.body.deskInfo})
+        res.json(del1)
+        //res.status(201).json({message: 'Desk deleted successfully'})
 
     } catch (e) {
-        res.status(500).json({message: 'Something go wrong...'})
+        res.status(500).json({message: `Something go wrong...${e}`})
     }
 })
 

@@ -2,20 +2,21 @@ import React, {useState} from 'react'
 import "../styles/button&menu.css"
 
 
-export const ListTasks = ({tasks, deleteTask}) => {
-    const [completed, setCompleted] = useState([])
-
-    const sortCompleted = () => {
-
+export const ListTasks = ({tasks, deleteTask, completeTask}) => {
+    /*
+    const sortCompleted = (task) => {
+        task.sort((a, b) => {
+            a.completed - b.completed
+        })
+        return task
     }
+
+     */
     /*
     if (!tasks.length){
         return <p className="center"> No tasks already</p>
     }
      */
-    const completeHandler = async () => {
-
-    }
 
     let normalizeDate = (mydate) => {
         let myDateObject = new Date(mydate);
@@ -36,6 +37,13 @@ export const ListTasks = ({tasks, deleteTask}) => {
         } catch (e) { console.log(e) }
     }
 
+    const completeHandler = async (index) => {
+        try{
+            completeTask(index)
+        } catch (e) {console.log(e)}
+    }
+
+    //tasks = sortCompleted(tasks)
     return (
 
         <ul className="collection">
@@ -43,10 +51,16 @@ export const ListTasks = ({tasks, deleteTask}) => {
                 <li
                     className="item"
                     key={task._id}>
-                    <div className="buttonCheck">
+                    <div className="buttonCheck"
+                         onClick={() => completeHandler(task._id)}>
                     </div>
+
                     <div className="oneTask">
-                        <span className="taskTitle" > {task.text} </span>
+                        { !task.completed &&
+                        <span className="taskTitle" > {task.text} </span>}
+                        { task.completed &&
+                        <span className="taskTitleLine" >
+                            {task.text} </span>}
                         <span className="taskDate">{ }</span>
                     </div>
 

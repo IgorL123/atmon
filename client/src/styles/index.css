@@ -639,6 +639,12 @@ main.mainApp section.mainSection span.taskTitle {
     width: 100%;
     word-break: break-word;
 }
+main.mainApp section.mainSection span.taskTitleLine {
+    display: block;
+    width: 100%;
+    word-break: break-word;
+    text-decoration: line-through;
+}
 
 main.mainApp section.mainSection span.taskDate {
     font-size: small;
@@ -652,6 +658,7 @@ main.mainApp section.mainSection ul li.item {
     padding: 0 6px;
     margin-bottom: 10px;
     display: flex;
+    padding-top: 4px;
 }
 main.mainApp section.mainSection ul li.item:hover {
     background-color: #F4F5F9;

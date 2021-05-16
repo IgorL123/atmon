@@ -21,12 +21,12 @@ export const deskReducer = (state = deskInitState, action) => {
         case CREATE_DESK_SUCCESS:
             return {
                 ...state,
-                desks: (state.desks).concat([action.newDesk.data])
+                desks: (state.desks).concat([action.newDesk.data.desk])
             }
         case DELETE_DESK_SUCCESS:
             return {
                 ...state,
-                desks: action.desks
+                desks: (state.desks).filter( desk => desk._id !== action.deletedDesk.data._id)
             }
         case SET_DESK_SUCCESS:
             return {

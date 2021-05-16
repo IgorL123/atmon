@@ -4,7 +4,7 @@ import {
     DELETE_TASK_FAIL,
     DELETE_TASK_SUCCESS,
     GET_TASKS_FAIL,
-    GET_TASKS_SUCCESS,
+    GET_TASKS_SUCCESS, SET_COMPLETE_FAIL, SET_COMPLETE_SUCCESS,
 } from "./types"
 import axios from "axios"
 
@@ -42,10 +42,25 @@ export const deleteTask1 = (index) => async (dispatch) => {
 
         dispatch({
             type: DELETE_TASK_SUCCESS,
-            tasks: deleted
+            deletedTask: deleted
         })
     } catch (e) {
         console.log(e)
         dispatch({type: DELETE_TASK_FAIL, payload: e.message})
+    }
+}
+
+export const completeTask = (index) => async (dispatch) => {
+    try{
+        const completed = await axios.post('api/link/complete',{index})
+        completed.data.completed = true
+        dispatch({
+            type:SET_COMPLETE_SUCCESS,
+            completedTask: completed
+        })
+
+    } catch (e){
+        console.log(e)
+        dispatch({type:SET_COMPLETE_FAIL, payload: e.message})
     }
 }

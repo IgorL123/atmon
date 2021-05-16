@@ -14,6 +14,8 @@ export const CREATE_TASK_SUCCESS = "create_task_success"
 export const CREATE_TASK_FAIL = "create_task_fail"
 export const DELETE_TASK_SUCCESS = "delete_task_success"
 export const DELETE_TASK_FAIL = "delete_task_fail"
+export const SET_COMPLETE_SUCCESS = "set_copmlete_success"
+export const SET_COMPLETE_FAIL = "set_copmlete_fail"
 
 export const GET_DESKS_SUCCESS = "get_desks_success"
 export const GET_DESKS_FAIL = "get_desks_fail"

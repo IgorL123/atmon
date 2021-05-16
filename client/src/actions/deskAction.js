@@ -47,12 +47,12 @@ export const createDesk = (value, userId) => async (dispatch) => {
     }
 }
 
-export const deleteDesk = (index) => async (dispatch) => {
+export const deleteDesk = (index, deskInfo) => async (dispatch) => {
     try {
-        const deleted = await axios.post('/api/desk/deletedesk', {index})
+        const deleted = await axios.post('/api/desk/deletedesk', {index, deskInfo})
         dispatch({
             type: DELETE_DESK_SUCCESS,
-            desks: deleted
+            deletedDesk: deleted
         })
     } catch (e) {
         console.log(e)
