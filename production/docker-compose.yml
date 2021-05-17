@@ -11,7 +11,7 @@ services:
     container_name: server
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ../server:/app
     networks:
       - library-mern-api
 
@@ -23,7 +23,7 @@ services:
     container_name: client
     volumes:
       - ./app/node_modules
-      - ./client:/app
+      - ../client:/app
       - web-root:/usr/share/nginx/html/
     depends_on:
       - library-api
@@ -59,7 +59,7 @@ services:
       - web-root:/usr/share/nginx/html/
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/usr/share/nginx/html/ --email 98wonsleved98@gmail.com --agree-tos --no-eff-email --force-renewal -d todoapp.ru  -d www.todoapp.ru
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html/ --email 98wonsleved98@gmail.com --agree-tos --no-eff-email --staging -d todoapp.ru  -d www.todoapp.ru
 
 volumes:
   certbot-etc:

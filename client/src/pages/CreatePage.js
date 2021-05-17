@@ -29,12 +29,16 @@ export const CreatePage = () => {
         let deskTitle = document.getElementsByClassName("deskTitle");
         console.log(deskTitle);
         if (!asideOpen) {
+            event.target.classList.add('open');
+            event.target.innerHTML = "X";
             asidePart.style.width = `30%`;
             mainPart.style.width = `calc(70% - 29px)`
             neibor.style.width = 100 + "%";
             neibor.style.visibility = "visible";
             setAsideOpen(true);
         } else {
+            event.target.classList.remove('open');
+            event.target.innerHTML = "|||";
             asidePart.style.width = `50px`;
             mainPart.style.width = `calc(100% - 29px - 50px)`;
             neibor.style.width = 0;
@@ -66,7 +70,7 @@ export const CreatePage = () => {
                       </section>
                       <aside className="asideMenu">
                           <div className="asideButton" onClick={asideFunction}>
-                              +
+                              |||
                           </div>
                           <div className="asideForm">
                               <DeskList

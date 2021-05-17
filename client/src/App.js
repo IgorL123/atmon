@@ -23,13 +23,13 @@ function App() {
     if(state && !loading){
         return (
             <Fragment>
-            <Router>
-            <Switch>
-                <Route path="/create" exact component={CreatePage}>
-                    <CreatePage />
-                </Route>
-                <Route path="/create" component={FormNewTask}> </Route>
-                <Route path="/create" component={ListTasks}> </Route>
+                <Router>
+                    <Switch>
+                        <Route path="/create" exact component={CreatePage}>
+                        <CreatePage />
+                    </Route>
+                    <Route path="/create" component={FormNewTask}> </Route>
+                    <Route path="/create" component={ListTasks}> </Route>
                 <Redirect to="/create" />
             </Switch>
             </Router>
@@ -39,17 +39,14 @@ function App() {
 
   return (
       <Fragment>
-      <Router>
+        <Router>
           <Switch>
-      <Fragment className="app">
-          <Route exact path="/" component={MainPage} />
-                <MainPage/>
-          <Route/>
-
-          <Redirect to="/"/>
-      </Fragment>
+            <Fragment className="app">
+                <Route exact path="/" component={MainPage} />
+                <Redirect to="/"/>
+            </Fragment>
           </Switch>
-      </Router>
+        </Router>
       </Fragment>
   )
 }

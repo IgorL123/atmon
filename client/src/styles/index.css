@@ -602,6 +602,7 @@ main.mainApp nav.appNavBar ul li button {
     color: #fff;
     background-color: #FF4545FF;
     padding: 5px 20px;
+    cursor: pointer;
 }
 
 main.mainApp nav.appNavBar ul li button:hover {
@@ -682,8 +683,27 @@ main.mainApp section.mainSection .asideMenu .asideButton {
     font-weight: bolder;
     line-height: 100%;
     position: absolute;
-    border: 1px solid black;
+    border: none;
     cursor: pointer;
+    transform: rotateZ(90deg) translate(10px, -10px);
+}
+
+main.mainApp section.mainSection .asideMenu .asideButton.open {
+    transform: rotateZ(0) translate(10px, 10px);
+}
+
+main.mainApp section.mainSection .asideMenu .asideButton.open:hover {
+    color: rgb(255, 69, 69);
+    transition: 0.3s;
+}
+
+
+main.mainApp section.mainSection .asideMenu lineMenu {
+    display: block;
+    width: 6px;
+    height: 2px;
+    padding-bottom: 2px;
+    margin: 0;
 }
 
 main.mainApp section.mainSection .asideMenu .asideForm{
@@ -697,7 +717,8 @@ main.mainApp section.mainSection .asideMenu .asideForm{
 
 main.mainApp section.mainSection .asideMenu.deskTitle {
     display: block;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
 }
 
 main.mainApp section.mainSection .asideMenu.deskTitle:hover{
@@ -710,7 +731,6 @@ main.mainApp section.mainSection .asideMenu .asideForm span.deskTitle {
     overflow: hidden;
     word-break: unset;
     cursor: pointer;
-    text-align: center;
 }
 
 /*
@@ -752,15 +772,15 @@ main.mainApp section.mainSection span.taskDate {
 }
 
 main.mainApp section.mainSection ul li.item {
+    border: 1px solid transparent;
     border-radius: 8px;
     transition: 0.4s;
-    padding: 0 6px;
+    padding: 4px 6px;
     margin-bottom: 10px;
     display: flex;
-    padding-top: 4px;
 }
-main.mainApp section.mainSection ul li.item:hover {
-    background-color: #F4F5F9;
+main.mainApp section.mainSection ul li.item:hover, main.mainApp section.mainSection ul li.item:focus-within {
+    border: 1px solid rgb(182, 182, 182);
     box-shadow: rgba(244, 245, 249, 0.06) 1px 1px 4px 0px inset, rgba(244, 245, 249, 0.06) -1px -1px 4px 0px inset;
     transition: 0.4s;
 }

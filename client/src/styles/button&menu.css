@@ -1,7 +1,7 @@
 
 .closebutton {
-    background-color: #fff;
-    border: 2px  black;
+    background-color: transparent;
+    border: 2px solid transparent;
     border-radius: 10px;
     color: black;
     padding: 5px;
@@ -11,13 +11,19 @@
     font-style: italic;
     left: 100px;
     transition-duration: 0.4s;
+    outline: none;
 }
 
 .closebutton:hover{
-    background-color: black;
-    border: 2px solid black;
-    padding: 5px;
+    background-color: #000;
+    border: 2px solid #000;
     color: white;
+}
+
+.closebutton:active {
+    background-color: #3C3F48;
+    border-color: #fff;
+    color: #fff;
 }
 
 
@@ -53,17 +59,7 @@ main.mainApp section.mainSection span.deskDate {
     display: block;
 }
 
-main.mainApp section.mainSection ul li.item {
-    border-radius: 8px;
-    transition: 0.4s;
-    padding: 0 6px;
-    margin-bottom: 10px;
-    display: flex;
-}
-main.mainApp section.mainSection ul li.item:hover {
-    background-color: #F4F5F9;
-    box-shadow: rgba(244, 245, 249, 0.06) 1px 1px 4px 0px inset, rgba(244, 245, 249, 0.06) -1px -1px 4px 0px inset;
-    transition: 0.4s;
-}
+
+
 
 

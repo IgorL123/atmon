@@ -48,7 +48,7 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
                     </div>
                     { board.text !== "default" &&
                     <div className="dropdown">
-                        <button className="dropbtn"
+                        <button className="closebutton"
                                     onClick={() => {
 
                                         deleteDesk(board._id, board.text)
