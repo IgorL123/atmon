@@ -7,10 +7,10 @@ router.post('/make', async (req,res) => {
     try {
 
         const task = new Task({
-            text: req.body.value,
+            text: req.body.eValue,
             author: req.body.userId,
             desk: req.body.deskInfo,
-            date: req.body.date
+            date: req.body.eDate
         })
 
         await task.save()

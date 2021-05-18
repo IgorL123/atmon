@@ -3,15 +3,7 @@ import "../styles/button&menu.css"
 
 
 export const ListTasks = ({tasks, deleteTask, completeTask}) => {
-    /*
-    const sortCompleted = (task) => {
-        task.sort((a, b) => {
-            a.completed - b.completed
-        })
-        return task
-    }
 
-     */
     /*
     if (!tasks.length){
         return <p className="center"> No tasks already</p>
@@ -44,7 +36,6 @@ export const ListTasks = ({tasks, deleteTask, completeTask}) => {
         } catch (e) {console.log(e)}
     }
 
-    //tasks = sortCompleted(tasks)
     return (
 
         <ul className="collection">

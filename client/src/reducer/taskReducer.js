@@ -11,7 +11,6 @@ import {
 
 } from "../actions/types"
 
-
 const appState = {
     tasks: [],
     isLoading: false,
