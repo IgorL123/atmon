@@ -4,6 +4,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
 
 * {
     margin: 0;
@@ -287,6 +290,7 @@ main.startMain section ul.links li button.getStarted {
     color: #fff;
     transition: 0.5s;
     outline: none;
+    cursor: pointer;
 }
 
 main.startMain section ul.links li button.getStarted:hover {
@@ -301,17 +305,16 @@ main.startMain section ul.links li a[href="#discoverfeatures"] {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 30px -12px, rgba(0, 0, 0, 0.3) 0px 8px 18px -18px;
     transition: 0.5s;
 }
+
 main.startMain section ul.links li a[href="#discoverfeatures"]:hover {
     border: 1px solid #45AF61;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;
     transition: 0.5s;
 }
 
-/*main.startMain section ul.links li button {*/
-/*    display: block;*/
-/*    border: 1px solid transparent;*/
-/*    border-radius: 30px;*/
-/*}*/
+main.startMain section section#discoverfeatures {
+    margin-top: 50px;
+}
 
 
 /*
@@ -452,6 +455,7 @@ section.authorization .form .authButton button {
     /*height: 38px;*/
     outline: none;
     transition: 0.5s;
+    padding: 15px 30px;
 }
 
 section.authorization .form .authButton button:hover {
@@ -561,6 +565,7 @@ main.mainApp {
     overflow: hidden;
     /*background-color: #D7D7D7;*/
     background-color: #F4F5F9;
+    min-width: 300px;
 }
 
 main.mainApp nav.appNavBar {
@@ -657,13 +662,6 @@ main.mainApp section.mainSection input {
     font-size: 16px;
 }
 
-main.mainApp section.tasksMain section.taskList {
-    width: 100%;
-    height: 100%;
-    padding-top: 5%;
-    padding-left: 5%;
-    padding-right: 5%;
-}
 
 
 main.mainApp section.mainSection .asideMenu {
@@ -686,6 +684,33 @@ main.mainApp section.mainSection .asideMenu .asideButton {
     border: none;
     cursor: pointer;
     transform: rotateZ(90deg) translate(10px, -10px);
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+main.mainApp section.mainSection .asideMenu.open {
+    width: 30%;
+}
+
+main.mainApp section.mainSection .asideMenu.open .asideForm {
+    width: 100%;
+    visibility: visible;
+}
+
+main.mainApp section.mainSection .asideMenu.open .asideForm ul.collection {
+    padding: 0px 5px;
+}
+
+main.mainApp section.mainSection .tasksMain.open {
+    width: calc(70% - 29px);
+}
+
+main.mainApp section.mainSection .asideMenu .asideButton:hover {
+    color: #45AF61;
+    transition: 0.3s;
 }
 
 main.mainApp section.mainSection .asideMenu .asideButton.open {
@@ -697,13 +722,50 @@ main.mainApp section.mainSection .asideMenu .asideButton.open:hover {
     transition: 0.3s;
 }
 
+@media screen and (max-width: 950px) {
+    main.mainApp section.mainSection .tasksMain.open {
+        width: calc(60% - 29px);
+    }
 
-main.mainApp section.mainSection .asideMenu lineMenu {
-    display: block;
-    width: 6px;
-    height: 2px;
-    padding-bottom: 2px;
-    margin: 0;
+    main.mainApp section.mainSection .asideMenu.open {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    main.mainApp section.mainSection {
+        width: calc(100% - 38px);
+    }
+
+    main.mainApp section.mainSection .tasksMain.open {
+        width: 50px;
+    }
+
+    main.mainApp section.mainSection .tasksMain.open .row {
+        visibility: hidden;
+    }
+
+    main.mainApp section.mainSection .asideMenu.open {
+        width: calc(100% - 19px - 60px);;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    main.mainApp section.mainSection .tasksMain.open {
+        width: 0px;
+    }
+
+    main.mainApp section.mainSection .tasksMain.open .row {
+        visibility: hidden;
+    }
+
+    main.mainApp section.mainSection .asideMenu #myInputDesk {
+        padding: 2px 5px;
+    }
+
+    main.mainApp section.mainSection .asideMenu.open {
+        width: calc(100%);
+    }
 }
 
 main.mainApp section.mainSection .asideMenu .asideForm{
@@ -739,7 +801,15 @@ main.mainApp section.mainSection .asideMenu .asideForm span.deskTitle {
 
 main.mainApp section.tasksMain section.taskList {
     overflow-y: scroll;
-    height: 87%;
+    height: calc(100% - 25px);
+    width: 100%;
+    padding: 8px 13px;
+}
+
+@media screen and (max-width: 600px) {
+    main.mainApp section.tasksMain section.taskList {
+        padding: 8px 0;
+    }
 }
 
 main.mainApp section.tasksMain section.taskList::-webkit-scrollbar {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const MainPageMain = () => {
+export const MainPageMain = ({openDisplaySignIn, openDisplaySignUp, display, closeDisplay, authType, changeAuthType}) => {
 
   return (
 
@@ -9,15 +9,23 @@ export const MainPageMain = () => {
       <h1>The Best Task Manager</h1>
 
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        This web application was made by students of MEPhI university as a project. The purpose was to create a web application
+        of setting and accounting tasks. Yes, it does not look like a project which is made by professionals since we are not.
+        However, we have done our best.
       </p>
 
       <ul className="links">
-        <li><button className="getStarted">Get Started</button></li>
+        <li><button className="getStarted"
+                    onClick={openDisplaySignUp}
+        >Get Started</button></li>
         <li><a href="#discoverfeatures">Discover Features</a></li>
       </ul>
+
+    <section id="discoverfeatures">
+
+
+    </section>
+
 
     </section>
 

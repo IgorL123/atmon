@@ -3,7 +3,7 @@
 
 #myInput {
     width: 100%;
-    padding: 8px 20px 8px 40px;
+    padding: 8px 20px;
     border: 1px solid #fff;
     margin-bottom: 0;
     border-radius: 10px;
@@ -16,7 +16,7 @@
 
 #myInputDesk {
     width: 100%;
-    padding: 2px 20px 2px 40px;
+    padding: 2px 20px;
     border: 1px solid #fff;
     margin-bottom: 0;
     border-radius: 10px;
@@ -29,17 +29,18 @@
 .column {
     float: left;
     width: 32%;
-    padding: 0 5px;
-    height: 100%;
+    padding: 0 5px 5px 5px;
+    height: 92%;
 }
 .row {
     padding: 0 5px;
     width: 100%
-
 }
 
+
+
 .column h3 {
-    height: 5%;
+    height: 25px;
     text-align: center;
 }
 
@@ -47,9 +48,10 @@
     height: 8%;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 .upperPart button{
-    background-color: #fff;
+    background-color: transparent;
     width: 64px;
     border: none;
     border-radius: 20%;
@@ -86,13 +88,30 @@
     clear: both;
 }
 
-@media screen and (max-width: 600px) {
+
+
+@media screen and (max-width: 950px) {
     .column {
         width: 100%;
         display: block;
         margin-bottom: 10px;
     }
+    .column:nth-child(3), .column:nth-child(4) {
+        display: none;
+    }
+
 }
+@media screen and (max-width: 350px) {
+    .upperPart button {
+        width: 45px;
+        border-radius: 40%;
+    }
+
+    #myInput {
+        padding: 8px 4px;
+    }
+}
+
 
 .buttonSwitch{
     background-color: #fff;
@@ -107,10 +126,6 @@
     font-style: italic;
     margin: 4px 2px;
     vertical-align: top;
-}
-
-ul.collection {
-    padding: 0 5px;
 }
 
 

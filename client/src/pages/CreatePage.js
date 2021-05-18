@@ -30,19 +30,17 @@ export const CreatePage = () => {
         console.log(deskTitle);
         if (!asideOpen) {
             event.target.classList.add('open');
+            asidePart.classList.add('open');
+            mainPart.classList.add('open');
+
             event.target.innerHTML = "X";
-            asidePart.style.width = `30%`;
-            mainPart.style.width = `calc(70% - 29px)`
-            neibor.style.width = 100 + "%";
-            neibor.style.visibility = "visible";
             setAsideOpen(true);
         } else {
             event.target.classList.remove('open');
+            asidePart.classList.remove('open');
+            mainPart.classList.remove('open');
+
             event.target.innerHTML = "|||";
-            asidePart.style.width = `50px`;
-            mainPart.style.width = `calc(100% - 29px - 50px)`;
-            neibor.style.width = 0;
-            neibor.style.visibility = "hidden";
 
             setAsideOpen(false);
         }

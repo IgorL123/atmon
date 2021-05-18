@@ -43,7 +43,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     try {
       await dispatch(signup(form))
     } catch (e) {
-      console.log(e)
+      console.log(e.message)
     }
   }
 
@@ -51,7 +51,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     try {
       await dispatch(login(form))
     } catch (e) {
-    console.log(e)
+    console.log(e.message)
     }
 
     if (fAuth.isAuthenticated){
