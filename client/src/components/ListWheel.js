@@ -28,6 +28,12 @@ export const ListWheel = ({tasks, deleteTask, createTask, completeTask}) => {
         "October","November","December"]
         return date.getDate() + " " + months[date.getMonth()] + ", " + date.getFullYear()
     }
+    const prettyDate2 = (date) => {
+        const months = ["January","February","March","April","May","June","July","August","September",
+            "October","November","December"]
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        return days[date.getDay()] + " " + date.getDate() + " " + months[date.getMonth()] + ", " + date.getFullYear()
+    }
 
     const sortTasksByDate = (tasks, date) => {
         return tasks.filter(item => new Date(item.date).getDate() === date.getDate()); }
@@ -51,7 +57,7 @@ export const ListWheel = ({tasks, deleteTask, createTask, completeTask}) => {
         </div>
         { dateRange.map(oneDate => (
             <div className="column" key={oneDate*1}>
-                <h3> {prettyDate(oneDate)}</h3>
+                <h3> {prettyDate2(oneDate)}</h3>
                 <section className="taskList" >
                     <ListTasks
                         tasks={sortTasksByDate(tasks, oneDate)}

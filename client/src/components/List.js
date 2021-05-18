@@ -37,9 +37,10 @@ export const ListTasks = ({tasks, deleteTask, completeTask}) => {
         } catch (e) { console.log(e) }
     }
 
-    const completeHandler = async (index) => {
+    const completeHandler = async (index, flag) => {
         try{
-            completeTask(index)
+            completeTask(index, flag)
+
         } catch (e) {console.log(e)}
     }
 
@@ -51,9 +52,14 @@ export const ListTasks = ({tasks, deleteTask, completeTask}) => {
                 <li
                     className="item"
                     key={task._id}>
+                    { !task.completed &&
                     <div className="buttonCheck"
-                         onClick={() => completeHandler(task._id)}>
-                    </div>
+                         onClick={() => completeHandler(task._id, true)}>
+                    </div>}
+                    {task.completed &&
+                    <div className="buttonCheck"
+                         onClick={() => completeHandler(task._id, false)}>
+                    </div> }
 
                     <div className="oneTask">
                         { !task.completed &&

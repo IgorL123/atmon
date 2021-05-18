@@ -46,7 +46,7 @@ router.post('/delete', async (req,res) => {
 
 router.post('/complete', async (req,res) => {
     try {
-        const completed = await Task.findOneAndUpdate({_id: req.body.index}, {$set:{completed: true}})
+        const completed = await Task.findOneAndUpdate({_id: req.body.index}, {$set:{completed: req.body.flag}})
         res.json(completed)
 
     } catch (e) {

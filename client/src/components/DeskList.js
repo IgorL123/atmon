@@ -23,6 +23,8 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
             }
         }
          */
+    const getMainDesk = (desks) => {
+        return desks.filter(item => item.text === "default" )}
 
     const setHandler = async (event, boardId, boardName) => {
         event.preventDefault()
@@ -32,6 +34,7 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
     const deleteHandler = async(index, deskInfo) => {
         try{
             deleteDesk(index, deskInfo)
+            setNewDesk(getMainDesk(desks), "default")
         } catch (e) {console.log(e)}
     }
     return (
@@ -50,8 +53,8 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
                     <div className="dropdown">
                         <button className="closebutton"
                                     onClick={() => {
-
-                                        deleteDesk(board._id, board.text)
+                                        deleteHandler(board._id, board.text)
+                                        //deleteDesk(board._id, board.text)
                                     }}> delete
 
                         </button>

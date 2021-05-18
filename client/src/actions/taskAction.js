@@ -50,10 +50,10 @@ export const deleteTask1 = (index) => async (dispatch) => {
     }
 }
 
-export const completeTask = (index) => async (dispatch) => {
+export const completeTask = (index, flag) => async (dispatch) => {
     try{
-        const completed = await axios.post('api/link/complete',{index})
-        completed.data.completed = true
+        const completed = await axios.post('api/link/complete',{index, flag})
+        completed.data.completed = flag
         dispatch({
             type:SET_COMPLETE_SUCCESS,
             completedTask: completed

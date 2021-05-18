@@ -62,7 +62,7 @@ export const CreatePage = () => {
                           createTask={(value, date) => {
                               dispatch(createTask1(value, curDesk, userId, date))
                           }}
-                          completeTask={(id) => dispatch(completeTask(id))}>
+                          completeTask={(id, flag) => dispatch(completeTask(id, flag))}>
 
                           </ListWheel>
                       </section>
