@@ -31,6 +31,7 @@
     width: 32%;
     padding: 0 5px 5px 5px;
     height: 92%;
+    overflow: hidden;
 }
 .row {
     padding: 0 5px;
@@ -109,6 +110,10 @@
 
     #myInput {
         padding: 8px 4px;
+    }
+
+    .column h3 {
+        font-size: 14px;
     }
 }
 

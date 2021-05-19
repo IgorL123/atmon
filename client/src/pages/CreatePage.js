@@ -7,10 +7,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AddFormDesk} from "../components/AddFormDesk";
 import {ListWheel} from "../components/ListWheel";
 
+import Cookies from "js-cookie";
 
 export const CreatePage = () => {
     const [asideOpen, setAsideOpen] = useState(false)
-    const userId = useSelector(state => state.auth.userId)
+    const userId = Cookies.get('userID');
     const dispatch = useDispatch()
     const curDesk = useSelector(state => state.desk.currentDesk)
 

@@ -20,7 +20,6 @@ router.post('/getdesks', async (req,res) => {
 
 router.post('/createdesk', async (req,res) => {
     try {
-
         const desk = new Desk({
             text: req.body.value, author: req.body.userId
         })

@@ -10,13 +10,17 @@ import {
     REGISTER_SUCCESS,
 
 } from "../actions/types";
+import Cookies from "js-cookie";
 
 const initialState = {
-    token: localStorage.getItem('token'),
+    // token: localStorage.getItem('token'),
+    token: Cookies.get('token'),
     isAuthenticated: null,
     isLoading: false,
-    userId: null,
+    userId: Cookies.get('userID'),
 }
+
+console.log('bb', initialState.userId);
 
 export default function authReducer(state = initialState, action) {
     const {type, payload} = action
@@ -48,7 +52,9 @@ export default function authReducer(state = initialState, action) {
                 isLoading: false,
             }
         case LOGOUT_SUCCESS:
-            localStorage.removeItem('token')
+            // localStorage.removeItem('token')
+            Cookies.remove('token');
+            Cookies.remove('userID');
             return {
                 ...state,
                 isAuthenticated: false,
@@ -56,7 +62,11 @@ export default function authReducer(state = initialState, action) {
             }
         case AUTH_ERROR:
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', payload.access)
+            // localStorage.setItem('token', payload.data.token)
+            Cookies.set('token', payload.data.token, { expires: 1, path: ''});
+            Cookies.set('userID', payload.data.userID, { expires: 1, path: ''});
+            // const data =  JSON.stringify(localStorage.getItem('token'))
+            // const token = Cookies.get('token');
             return {
                 ...state,
                 isAuthenticated: true,

@@ -1,4 +1,5 @@
 import {useState, useCallback, useEffect} from 'react'
+import Cookies from 'js-cookie'
 
 const storageName = 'userData'
 
@@ -12,19 +13,21 @@ export const useAuth = () => {
         setToken(jwtToken)
         setUserId(id)
 
-        sessionStorage.setItem(storageName, JSON.stringify({
+        localStorage.setItem(storageName, JSON.stringify({
             userId: id, token: jwtToken
         }))
+
     }, [])
 
     const logout = useCallback(() => {
         setToken(null)
         setUserId(null)
-        sessionStorage.removeItem(storageName)
+        localStorage.removeItem(storageName)
     }, [])
 
     useEffect(() => {
-        const data =  JSON.stringify(sessionStorage.getItem(storageName))
+        const data =  JSON.stringify(localStorage.getItem(storageName))
+        const token = Cookies.get('token');
 
         if (data && data.token){
             login(data.token, data.userId)
