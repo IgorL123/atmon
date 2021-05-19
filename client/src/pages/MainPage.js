@@ -36,7 +36,9 @@ export const MainPage = () => {
     }
 
   return (
+
     <div className="page">
+
       <NewAuthComponent display={display} closeDisplay={closeDisplay} authType={authType} changeAuthType={changeAuthType}/>
       <header>
         <NewNavBar
@@ -58,8 +60,8 @@ export const MainPage = () => {
             changeAuthType={changeAuthType}
         />
       </main>
-    </div>
 
+    </div>
 
 
 );

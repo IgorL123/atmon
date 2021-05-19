@@ -41,7 +41,7 @@ function App() {
       <Fragment>
         <Router>
           <Switch>
-            <Fragment className="app">
+            <Fragment>
                 <Route exact path="/" component={MainPage} />
                 <Redirect to="/"/>
             </Fragment>

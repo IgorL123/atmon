@@ -144,12 +144,36 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 2px 2px;
+    margin: 2px 12px 2px 2px;
     cursor: pointer;
     border-radius: 5px;
 }
 .buttonCheck:hover{
     background-color: #c8c8c8;
+}
+
+.isDone {
+    width: 28px;
+    height: 20px;
+    background-color: #3c424d;
+    border: 1px solid #dddddd;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2px 12px 2px 2px;
+}
+
+.check {
+    left: 6px;
+    width: 8px;
+    height: 14px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    position: relative;
 }
 
 .dropbtn {
@@ -164,6 +188,7 @@
 
 .dropbtn:hover, .dropbtn:focus {
     background-color: black;
+
 }
 
 .dropdown {
@@ -190,3 +215,10 @@
 .dropdown-content a:hover {background-color: #ddd}
 .show {display:block;}
 
+
+/*  ALERT   */
+
+.error{
+    color: red;
+    text-align: center;
+}

@@ -6,7 +6,7 @@ const schema = new Schema({
     date: {type: String, default:  new Date},
     desk: {type: String, required: true, default: 'default', ref: 'Desk'},
     completed: {type:Boolean, default: false},
-    author: {type: String, required: true, unique: true, ref: 'User'}
+    author: {type: String, required: true, ref: 'User'}
 })
 
 module.exports = model('Task', schema)

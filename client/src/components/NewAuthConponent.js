@@ -10,7 +10,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
 
   const dispatch = useDispatch()
   const fAuth = useSelector(state => state)
-
+  const errorText = useSelector(state => state.alert.error)
 
   let modal = document.getElementsByClassName('authorization')[0];
 // When the user clicks anywhere outside of the modal, close it
@@ -114,6 +114,11 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
 
           <span id="authSpanToChange">Sing Up/In to Get Started</span>
 
+
+          { errorText &&
+              <div className="error"> {errorText}
+              </div>
+          }
 
           <div className="inputFields">
 

@@ -48,9 +48,11 @@ export const ListTasks = ({tasks, deleteTask, completeTask}) => {
                          onClick={() => completeHandler(task._id, true)}>
                     </div>}
                     {task.completed &&
-                    <div className="buttonCheck"
+                    <div className="isDone"
                          onClick={() => completeHandler(task._id, false)}>
-                    </div> }
+                        <div className="check"></div>
+                    </div>
+                    }
 
                     <div className="oneTask">
                         { !task.completed &&

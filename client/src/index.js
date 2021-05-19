@@ -12,7 +12,6 @@ const unsubscribe = store.subscribe(() =>
 unsubscribe()
 
 ReactDOM.render(
-
         <Provider store={store}>
             <App />
         </Provider>,

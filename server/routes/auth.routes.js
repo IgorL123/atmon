@@ -12,7 +12,7 @@ router.post(
     '/register',
     [
       check('email','Wrong Email').isEmail(),
-        check('password', 'Минимальная длина пароля - 6 символов')
+        check('password', 'Password must be at least 6 characters long')
             .isLength({min: 6 })
     ],
     async (req, res) => {
@@ -20,10 +20,7 @@ router.post(
         const errors = validationResult(req)
 
         if (!errors.isEmpty()){
-            return res.status(400).json({
-                errors: errors.array(),
-                message: 'Invalid data during registration'
-            })
+            return res.status(400).send(errors.array()[0].msg)
         }
 
         const {email, password} = req.body
@@ -31,7 +28,7 @@ router.post(
         const candidate = await User.findOne({ email })
 
         if (candidate){
-            return res.status(400).json({message: 'User already exist.'})
+            return res.status(400).send('User already exist.')
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -43,42 +40,39 @@ router.post(
             await defaultDesk.save()
         }
 
-        res.status(201).json({message: 'User was created'})
+        res.status(201).send('User was created')
 
 
     } catch (e) {
-        res.status(500).json({message: `${e} Something go wrong...`})
+        res.status(500).send(`${e} Something go wrong...`)
     }
 })
 
 // /api/auth/login
 router.post('/login',
     [
-      check('email', ' ВВедите корректный email').normalizeEmail().isEmail(),
-      check('password','ВВедите пароль').exists()
+      check('email', 'Enter correct email').normalizeEmail().isEmail(),
+      check('password','Enter password').exists()
     ],
     async (req,res) => {
         try {
             const errors = validationResult(req)
 
             if (!errors.isEmpty()){
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Invalid data'
-                })
+                return res.status(400).send(errors.array()[0].msg)
             }
             const {email, password} = req.body
 
             const user = await User.findOne({ email })
 
             if (!user){
-                return res.status(400).json({message:'User doesnt exist '})
+                return res.status(400).send('User doesnt exist ')
             }
 
             const isMatch = await bcrypt.compare(password, user.password)
 
             if (!isMatch){
-                return res.status(400).json({message: 'Wrong password'})
+                return res.status(400).send( 'Wrong password')
             }
 
             const token = jwt.sign(
@@ -89,7 +83,7 @@ router.post('/login',
             res.json({token: token, userID: user.id })
 
         } catch (e) {
-            res.status(500).json({message: 'Something go wrong...'})
+            res.status(500).send( 'Something go wrong...')
         }
 })
 
