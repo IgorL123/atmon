@@ -1,28 +1,14 @@
 import React from 'react'
 import "../styles/button&menu.css"
+import {useSelector} from "react-redux";
 
 export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
+    const curDesk = useSelector(state => state.desk.currentDesk)
 
     if (!desks.length){
         return <p className="center"> No desks already</p>
     }
-    /*
-        const dropDown = () => {
-            document.getElementById("myDropdown").classList.toggle("show"}
-        /*
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                let i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-         */
+
     const getMainDesk = (desks) => {
         return desks.filter(item => item.text === "default" )}
 
@@ -37,11 +23,18 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
             setNewDesk(getMainDesk(desks), "default")
         } catch (e) {console.log(e)}
     }
+
+
+
     return (
         <ul className="collection">
-            {desks.map(board => (
+            {desks.map((board, index) => {
+                console.log(board.text, ' ', board.text === curDesk);
+                return (
+
                 <li
-                className="item"
+                className={board.text === curDesk ? "item currDesk" : "item"}
+                //   className="item"
                 key={board._id}>
                     <div className="oneDesk">
                         <span
@@ -54,20 +47,13 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
                         <button className="closebutton"
                                     onClick={() => {
                                         deleteHandler(board._id, board.text)
-                                        //deleteDesk(board._id, board.text)
                                     }}> delete
 
                         </button>
-                        {/*
-                        <div id="myDropdown" className="dropdown-content">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                        </div> */}
                     </div>}
 
                 </li>
-            ))}
+            )})}
         </ul>
 
     )

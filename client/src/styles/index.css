@@ -238,51 +238,52 @@ nav.NewNavBar button.SignIn:active {
 */
 
 main.startMain {
-    height: 1400px;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
-main.startMain section {
+main.startMain section.mainSec {
     padding: 40px 0;
     width: 60%;
     text-align: center;
     min-width: 450px;
+    max-width: calc(0.6 * 1920px);
 }
 
-main.startMain section h1 {
+main.startMain section.mainSec h1 {
     padding-bottom: 40px;
     font-size: 48px;
     color: #22252F;
 }
 
-main.startMain section p {
+main.startMain section.mainSec p {
     display: block;
     padding-bottom: 40px;
 }
 
-main.startMain section {
+main.startMain section.mainSec {
     display: block;
     padding-top: 40px;
 }
 
-main.startMain section ul.links {
+main.startMain section.mainSec ul.links {
     display: flex;
     justify-content: center;
 }
 
-main.startMain section ul.links li {
+main.startMain section.mainSec ul.links li {
     display: block;
     margin: 0 10px;
 }
 
-main.startMain section ul.links li a, main.startMain section ul.links li button {
+main.startMain section.mainSec ul.links li a, main.startMain section.mainSec ul.links li button {
     display: block;
     border: 1px solid transparent;
     border-radius: 30px;
 }
 
-main.startMain section ul.links li button.getStarted {
+main.startMain section.mainSec ul.links li button.getStarted {
     width: 100%;
     font-size: 14px;
     padding: 15px 52px;
@@ -293,11 +294,11 @@ main.startMain section ul.links li button.getStarted {
     cursor: pointer;
 }
 
-main.startMain section ul.links li button.getStarted:hover {
+main.startMain section.mainSec ul.links li button.getStarted:hover {
     background-color: #3d9d57;
 }
 
-main.startMain section ul.links li a[href="#discoverfeatures"] {
+main.startMain section.mainSec ul.links li a[href="#discoverfeatures"] {
     font-size: 14px;
     padding: 15px 30px;
     background-color: #fff;
@@ -306,14 +307,10 @@ main.startMain section ul.links li a[href="#discoverfeatures"] {
     transition: 0.5s;
 }
 
-main.startMain section ul.links li a[href="#discoverfeatures"]:hover {
+main.startMain section.mainSec ul.links li a[href="#discoverfeatures"]:hover {
     border: 1px solid #45AF61;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;
     transition: 0.5s;
-}
-
-main.startMain section section#discoverfeatures {
-    margin-top: 50px;
 }
 
 
@@ -323,13 +320,13 @@ main.startMain section section#discoverfeatures {
 
 
 @media screen and (max-width: 600px) {
-    main.startMain section {
+    main.startMain section.mainSec {
         padding: 40px 19px;
         width: 100%;
         min-width: 0px;
     }
 
-    main.startMain section h1 {
+    main.startMain section.mainSec h1 {
         font-size: 24px;
     }
 
@@ -337,11 +334,11 @@ main.startMain section section#discoverfeatures {
 }
 
 @media screen and (max-width: 450px) {
-    main.startMain section ul.links {
+    main.startMain section.mainSec ul.links {
         display: block;
     }
 
-    main.startMain section ul.links li {
+    main.startMain section.mainSec ul.links li {
         margin-bottom: 10px;
     }
 }
@@ -903,4 +900,159 @@ main.mainApp section.mainSection section.tasksMain .addNewTask {
     padding: 10px 0;
 }
 
+/*
+        DESKS MARK
+ */
 
+
+.currDesk {
+    border-color: #45AF61!important;
+}
+
+
+
+/*
+    Discover features
+ */
+
+
+.startMain section#discoverfeatures {
+    width: 100%;
+    paddin: 0;
+    margin: 100px 0;
+}
+
+.startMain section#discoverfeatures .box {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.startMain section#discoverfeatures .box img {
+    display: block;
+    padding-right: 15px;
+    width: 40%;
+    height: auto;
+}
+
+.startMain section#discoverfeatures .box:nth-child(odd) img {
+    display: block;
+    padding-left: 15px;
+    width: 40%;
+    height: auto;
+}
+
+.startMain section#discoverfeatures .box .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.startMain section#discoverfeatures .box p {
+    padding: 0;
+    font-size: 21px;
+    color: #22252F;
+    max-width: 500px;
+}
+
+@media screen and (max-width: 950px) {
+    .startMain section#discoverfeatures .box {
+        flex-direction: column;
+    }
+
+    .startMain section#discoverfeatures .box:nth-child(odd) {
+        flex-direction: column-reverse;
+    }
+
+    .startMain section#discoverfeatures .box img {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    .startMain section#discoverfeatures .box:nth-child(odd) img {
+        width: 100%;
+        padding: 15px 0;
+    }
+}
+@media screen and (max-width: 550px) {
+    .startMain section#discoverfeatures .box p {
+        padding: 0;
+        font-size: 18px;
+        color: #22252F;
+    }
+}
+
+footer {
+    /*padding-top: 25px;*/
+    background-color: #3C3F48;
+    color: #fff;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+footer span {
+    text-align: center;
+    color: #fff;
+    display: block;
+}
+
+footer .wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+footer ul {
+    width: 100%;
+    display: flex;
+    /*width: 400px;*/
+    justify-content: space-around;
+    max-width: 700px;
+}
+
+footer ul li a {
+    border-radius: 15px;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+footer ul li a:hover {
+    border-color: #2980b9;
+    transition: 0.3s;
+}
+
+footer ul li a:hover span {
+    color: #3498db;
+    transition: 0.3s;
+
+}
+
+
+footer ul li span {
+    display: block;
+    color: #fff;
+    padding-right: 15px;
+    transition: 0.3s;
+}
+
+footer img {
+    width: 40px;
+    height: auto;
+    /*background-color: #fff;*/
+}
+
+@media screen and (max-width: 600px) {
+    footer ul {
+
+        flex-direction: column;
+    }
+}

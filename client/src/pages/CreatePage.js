@@ -28,7 +28,6 @@ export const CreatePage = () => {
         let mainPart = (document.getElementsByClassName("tasksMain"))[0];
         let asidePart = (document.getElementsByClassName("asideMenu"))[0];
         let deskTitle = document.getElementsByClassName("deskTitle");
-        console.log(deskTitle);
         if (!asideOpen) {
             event.target.classList.add('open');
             asidePart.classList.add('open');
