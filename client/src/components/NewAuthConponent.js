@@ -11,6 +11,8 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
   const dispatch = useDispatch()
   const fAuth = useSelector(state => state)
   const errorText = useSelector(state => state.alert.error)
+  // const [someMessage, setSomeMessage] = useState('');
+
 
   let modal = document.getElementsByClassName('authorization')[0];
 // When the user clicks anywhere outside of the modal, close it
@@ -59,6 +61,10 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     }
 
   }
+  let isLoading = useSelector(state => state.auth.isLoading);
+  if (isLoading === undefined) {
+    isLoading = false;
+  }
 
 
 
@@ -101,6 +107,15 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     }
   }, [authType, form])
 
+  let text = '';
+  if (errorText) {
+    text = errorText;
+  }
+
+  if (isLoading) {
+    text = 'Loading...'
+  }
+
 
   return (
 
@@ -115,14 +130,14 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
           <span id="authSpanToChange">Sing Up/In to Get Started</span>
 
 
-          { errorText &&
-              <div className="error"> {errorText}
-              </div>
-          }
+          {/*{ errorText &&*/}
+          {/*    <div className="error"> {errorText}*/}
+          {/*    </div>*/}
+          {/*}*/}
 
           <div className="inputFields">
 
-            <span id="authErrorMessage">Error</span>
+            <span id="authErrorMessage">{text}</span>
 
             <label htmlFor="email">Email</label>
             <div className="input-field">
@@ -151,7 +166,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
             <div className="authButton">
               <button
                   id="signUpInButton"
-                  disabled={loading}
+                  disabled={isLoading}
                   onClick={loginHandler}
               >
               </button>

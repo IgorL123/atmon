@@ -12,7 +12,7 @@ router.post(
     '/register',
     [
       check('email','Wrong Email').isEmail(),
-        check('password', 'Password must be at least 6 characters long')
+        check('password', 'Password at least 6 characters long')
             .isLength({min: 6 })
     ],
     async (req, res) => {
@@ -28,7 +28,7 @@ router.post(
         const candidate = await User.findOne({ email })
 
         if (candidate){
-            return res.status(400).send('User already exist.')
+            return res.status(400).send('User already exist')
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -44,7 +44,7 @@ router.post(
 
 
     } catch (e) {
-        res.status(500).send(`${e} Something go wrong...`)
+        res.status(500).send(`${e} Something went wrong...`)
     }
 })
 
@@ -66,13 +66,13 @@ router.post('/login',
             const user = await User.findOne({ email })
 
             if (!user){
-                return res.status(400).send('User doesnt exist ')
+                return res.status(400).send('Wrong email or password')
             }
 
             const isMatch = await bcrypt.compare(password, user.password)
 
             if (!isMatch){
-                return res.status(400).send( 'Wrong password')
+                return res.status(400).send( 'Wrong email or password')
             }
 
             const token = jwt.sign(
@@ -83,7 +83,7 @@ router.post('/login',
             res.json({token: token, userID: user.id })
 
         } catch (e) {
-            res.status(500).send( 'Something go wrong...')
+            res.status(500).send( 'Something went wrong...')
         }
 })
 

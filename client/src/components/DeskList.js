@@ -29,7 +29,6 @@ export const DeskList = ({desks, setNewDesk, deleteDesk}) => {
     return (
         <ul className="collection">
             {desks.map((board, index) => {
-                console.log(board.text, ' ', board.text === curDesk);
                 return (
 
                 <li

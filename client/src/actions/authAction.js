@@ -13,6 +13,10 @@ import axios from "axios";
 
 export const signup = (form) =>  async dispatch => {
     try {
+        dispatch({
+            type: USER_LOADING,
+            payload: 0
+        })
         const data = await axios.post("/api/auth/register", form)
         dispatch(login(form))
 
@@ -27,6 +31,10 @@ export const signup = (form) =>  async dispatch => {
 
 export const login = (form) =>  async dispatch => {
     try {
+        dispatch({
+            type: USER_LOADING,
+            payload: 0
+        })
 
         const data = await axios.post("/api/auth/login", form)
         dispatch({

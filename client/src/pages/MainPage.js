@@ -49,6 +49,7 @@ export const MainPage = () => {
             authType={authType}
             changeAuthType={changeAuthType}
         />
+        <img src="/favicon.ico" alt=""/>
       </header>
       <main className="startMain">
         <MainPageMain

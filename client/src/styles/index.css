@@ -515,12 +515,11 @@ section.authorization .form .SignInForm .inputFields span#authErrorMessage {
     font-size: 14px;
     text-align: center;
     /*background-color: rgba(255, 132, 132, 0.3);*/
+    min-height: 52px;
     color: rgb(255, 69, 69);
     display: block;
-    visibility: hidden;
     width: 100%;
     padding: 15px 0;
-
 }
 
 
