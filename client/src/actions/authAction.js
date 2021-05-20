@@ -25,7 +25,6 @@ export const signup = (form) =>  async dispatch => {
             type: REGISTER_FAIL,
             payload: e.response
         })
-
     }
 }
 
