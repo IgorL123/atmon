@@ -9,7 +9,7 @@ export const NewNavBar = ({openDisplaySignIn, openDisplaySignUp, display, closeD
     <nav className="NewNavBar">
 
       <div className="logo">
-        <span>TODO</span>
+        <span>ATM</span>
       </div>
 
       <ul>

@@ -3,8 +3,7 @@ const bcrypt = require('bcryptjs')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
-const User = require('../models/User')
-const Desk = require('../models/Desk')
+const db = require('../database')
 const router = Router()
 
 // /api/auth/register
@@ -25,26 +24,19 @@ router.post(
 
         const {email, password} = req.body
 
-        const candidate = await User.findOne({ email })
+        const exist = await db.query('SELECT email FROM "users" WHERE email = ($1)', [email])
 
-        if (candidate){
+        if (exist.rowCount !== 0){
             return res.status(400).send('User already exist')
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        const user = new User({email, password: hashedPassword })
-        await user.save()
-
-        if (user){
-            const defaultDesk = new Desk({text: "default", author: user._id })
-            await defaultDesk.save()
-        }
-
+        await db.query('INSERT INTO users(email, password) VALUES($1, $2)', [email , hashedPassword])
         res.status(201).send('User was created')
 
 
     } catch (e) {
-        res.status(500).send(`${e} Something went wrong...`)
+        res.status(500).send(e.array()[0])
     }
 })
 
@@ -63,27 +55,27 @@ router.post('/login',
             }
             const {email, password} = req.body
 
-            const user = await User.findOne({ email })
+            const user = await db.query("SELECT id, email, password FROM users WHERE email = ($1)", [email])
+            console.log(user)
 
-            if (!user){
-                return res.status(400).send('Wrong email or password')
+            if (user.rowCount === 0){
+                res.status(400).send("Wrong email or password")
             }
-
-            const isMatch = await bcrypt.compare(password, user.password)
+            const isMatch = await bcrypt.compare(password, user.rows[0].password)
 
             if (!isMatch){
                 return res.status(400).send( 'Wrong email or password')
             }
 
             const token = jwt.sign(
-                {userId: user.id },
+                {userId: user.rows[0].id },
                 config.get('jwtSecret'),
                 {expiresIn: '1h'}
             )
-            res.json({token: token, userID: user.id })
+            res.json({token: token, userID: user.rows[0].id })
 
         } catch (e) {
-            res.status(500).send( 'Something went wrong...')
+            res.status(500).send( `${e} Something went wrong... `)
         }
 })
 

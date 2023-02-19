@@ -15,9 +15,9 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
 
 
   let modal = document.getElementsByClassName('authorization')[0];
-// When the user clicks anywhere outside of the modal, close it
+// When the user clicks anywhere outside the modal, close it
   window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
       closeDisplay();
     }
   }

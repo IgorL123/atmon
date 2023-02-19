@@ -151,13 +151,13 @@ nav.NewNavBar button {
 nav.NewNavBar button.SignUp {
     background-color: #fff;
     border-radius: 30px;
-    color: #45AF61;
+    color: #4581af;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 30px -12px, rgba(0, 0, 0, 0.3) 0px 8px 18px -18px;
     transition: 0.5s;
 }
 
 nav.NewNavBar button.SignUp:hover {
-    border: 1px solid #45AF61;
+    border: 1px solid #4581af;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;
     transition: 0.5s;
 }
@@ -174,9 +174,9 @@ nav.NewNavBar button.SignIn {
 }
 
 nav.NewNavBar button.SignIn:hover {
-    border: 1px solid #45AF61;
+    border: 1px solid #4581af;
     background-color: #fff;
-    color: #45AF61;
+    color: #4581af;
     transition: 0.5s;
 }
 
@@ -227,7 +227,7 @@ nav.NewNavBar button.SignIn:active {
     nav.NewNavBar button.SignUp {
         background-color: transparent;
         border: none;
-        color: #45AF61;
+        color: #4581af;
         box-shadow: none;
         transition: 0.5s;
     }
@@ -287,7 +287,7 @@ main.startMain section.mainSec ul.links li button.getStarted {
     width: 100%;
     font-size: 14px;
     padding: 15px 52px;
-    background-color: #45AF61;
+    background-color: #4581af;
     color: #fff;
     transition: 0.5s;
     outline: none;
@@ -295,20 +295,20 @@ main.startMain section.mainSec ul.links li button.getStarted {
 }
 
 main.startMain section.mainSec ul.links li button.getStarted:hover {
-    background-color: #3d9d57;
+    background-color: #4581af;
 }
 
 main.startMain section.mainSec ul.links li a[href="#discoverfeatures"] {
     font-size: 14px;
     padding: 15px 30px;
     background-color: #fff;
-    color: #45AF61;
+    color: #4581af;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 30px -12px, rgba(0, 0, 0, 0.3) 0px 8px 18px -18px;
     transition: 0.5s;
 }
 
 main.startMain section.mainSec ul.links li a[href="#discoverfeatures"]:hover {
-    border: 1px solid #45AF61;
+    border: 1px solid #4581af;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 30px -12px, rgba(0, 0, 0, 0.3) 0px 4px 18px -18px;
     transition: 0.5s;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {DiscoverFeatures} from '../components/discoverFeatures'
+import {DiscoverFeatures} from './discoverFeatures'
 
 
 export const MainPageMain = ({openDisplaySignIn, openDisplaySignUp, display, closeDisplay, authType, changeAuthType}) => {
@@ -8,12 +8,11 @@ export const MainPageMain = ({openDisplaySignIn, openDisplaySignUp, display, clo
 
     <section className="mainSec">
 
-      <h1>The Best Task Manager</h1>
+      <h1>ATM Monitoring</h1>
 
         <p>
-          This web application was made by students of MEPhI university as a project. The purpose was to create a web application
-          of setting and accounting tasks. Yes, it does not look like a project which is made by professionals since we are not.
-          However, we have done our best.
+          This web application was made by student of MEPhI university as a project. The purpose was to create a web application
+          of monitoring atms
         </p>
 
       <ul className="links">

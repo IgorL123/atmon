@@ -5,11 +5,7 @@ import rootReducer from "./reducer";
 import Cookies from 'js-cookie';
 
 let isAuth;
-if (Cookies.get('token')) {
-    isAuth = true;
-} else {
-    isAuth = false;
-}
+isAuth = !!Cookies.get('token');
 
 const InitialState = {auth:{
     isAuthenticated: isAuth,

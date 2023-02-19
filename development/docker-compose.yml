@@ -9,11 +9,28 @@ services:
       dockerfile: Dockerfile.dev
     image: dev-server
     container_name: dev-server
+    environment:
+      - DATABASE_URL=postgresql://postgres_user:12345@database:5432/postgres_user
     volumes:
       - /app/node_modules
       - ../server:/app
     networks:
       - library-mern-api
+    depends_on:
+       - database
+
+
+  database:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=postgres_user
+    volumes:
+      - ../database:/var/lib/postgresql/data/
+    ports:
+      - "54321:5432"
 
   client:
     build:
@@ -40,8 +57,12 @@ services:
     depends_on:
       - library-api
       - client
+      - database
     networks:
       - library-mern-api
+
+volumes:
+  database:
 
 networks:
   library-mern-api:
