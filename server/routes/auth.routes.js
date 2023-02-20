@@ -56,7 +56,6 @@ router.post('/login',
             const {email, password} = req.body
 
             const user = await db.query("SELECT id, email, password FROM users WHERE email = ($1)", [email])
-            console.log(user)
 
             if (user.rowCount === 0){
                 res.status(400).send("Wrong email or password")

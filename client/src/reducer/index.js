@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import {taskRootReducer} from "./taskReducer.js";
+import {opRootReducer} from "./opReducer.js";
 import authReducer from "./authReducer";
 import {deskReducer} from "./deskReducer";
 import alertReducer from "./alertReducer";
@@ -8,7 +8,7 @@ import alertReducer from "./alertReducer";
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    taskReducer : taskRootReducer,
+    opReducer : opRootReducer,
     desk: deskReducer,
     alert: alertReducer,
 

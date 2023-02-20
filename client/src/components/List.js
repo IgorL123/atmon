@@ -2,74 +2,40 @@ import React, {useState} from 'react'
 import "../styles/button&menu.css"
 
 
-export const ListTasks = ({tasks, deleteTask, completeTask}) => {
-
-    /*
-    if (!tasks.length){
-        return <p className="center"> No tasks already</p>
-    }
-     */
-
-    let normalizeDate = (mydate) => {
-        let myDateObject = new Date(mydate);
-        let dd = myDateObject.getDate();
-        let mm = myDateObject.getMonth();
-        let yyyy = myDateObject.getFullYear();
-        return mm + '.' + dd + '.' + yyyy;  // Date format: 2.27.2020
-    }
-    const normDate = (prevDate) => {
-        const date = new Date(prevDate)
-        return date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear()
-    }
-
-    const deleteHandler = async (event, taskId) => {
+export const List = ({ops, blockOp, date}) => {
+    const blockHandler = async (event, opId) => {
         //event.preventDefault()
         try {
-            deleteTask(taskId)
+            blockOp(opId)
         } catch (e) { console.log(e) }
     }
-
-    const completeHandler = async (index, flag) => {
-        try{
-            completeTask(index, flag)
-
-        } catch (e) {console.log(e)}
-    }
-
+    ops = ops.filter(op => op.date.day === date.day)
     return (
 
         <ul className="collection">
-            {tasks.map(task => (
-                <li
-                    className="item"
-                    key={task._id}>
-                    { !task.completed &&
-                    <div className="buttonCheck"
-                         onClick={() => completeHandler(task._id, true)}>
-                    </div>}
-                    {task.completed &&
-                    <div className="isDone"
-                         onClick={() => completeHandler(task._id, false)}>
-                        <div className="check"></div>
-                    </div>
-                    }
+            <table>
+                <caption></caption>
+                <tr>
+                    <th>Account</th>
+                    <th>Card</th>
+                    <th>Atm</th>
+                    <th>Value</th>
+                    <th>Currency</th>
+                    <th>Place</th>
+                </tr>
+                {ops.map(op => (
+                    <tr>
+                    <th>{op.account_id}</th>
+                    <th>{op.card_id}</th>
+                    <th>{op.atm_id}</th>
+                    <th>{op.value}</th>
+                    <th>{op.name}</th>
+                    <th>{op.place}</th>
+                        <th>{op.blocked}</th>
 
-                    <div className="oneTask">
-                        { !task.completed &&
-                        <span className="taskTitle" > {task.text} </span>}
-                        { task.completed &&
-                        <span className="taskTitleLine" >
-                            {task.text} </span>}
-                        <span className="taskDate">{ }</span>
-                    </div>
-
-                    <button className="closebutton"
-                            onClick={(event) => deleteHandler(event, task._id)}
-                    >Delete</button>
-
-
-                </li>
-            ))}
+                    </tr>
+                    ))}
+            </table>
         </ul>
 
     )

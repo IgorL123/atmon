@@ -1,15 +1,14 @@
 const {Router} = require('express')
-
+const db = require('../database')
 const router = Router()
-const ath = require('../middleware/auth.middleware')
 
-// /api/desk/...
+// /api/table/...
 
-router.post('/getdesks', async (req,res) => {
+router.post('/getOps', async (req,res) => {
     try {
-
-        //let desks = await Desk.find({author: req.body.userId})
-        //res.json(desks)
+        const date = req.body
+        const ops = await db.query('SELECT * from transaction WHERE data = ($1)', [date])
+        res.json(ops)
 
     } catch (e) {
         res.status(500).json({message: `Something go wrong... ${e}`})
@@ -28,6 +27,9 @@ router.post('/createdesk', async (req,res) => {
 
 router.post('/deletedesk', async (req,res) => {
     try {
+
+        const op = req.body
+        await db.query("DELETE FROM transaction WHERE id = ($1)", [op])
 
     } catch (e) {
         res.status(500).json({message: `Something go wrong...${e}`})

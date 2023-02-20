@@ -7,7 +7,7 @@ import {MainPage} from "./pages/MainPage"
 import {CreatePage} from "./pages/CreatePage"
 import {useSelector} from "react-redux"
 import {FormNewTask} from "./components/Form"
-import {ListTasks} from "./components/List"
+import {List} from "./components/List"
 
 
 
@@ -29,7 +29,7 @@ function App() {
                         <CreatePage />
                     </Route>
                     <Route path="/create" component={FormNewTask}> </Route>
-                    <Route path="/create" component={ListTasks}> </Route>
+                    <Route path="/create" component={List}> </Route>
                 <Redirect to="/create" />
             </Switch>
             </Router>

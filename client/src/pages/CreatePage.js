@@ -1,13 +1,12 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {Navbar} from "../components/Navbar"
 import {DeskList} from "../components/DeskList"
-import {fetchTask, createTask1, deleteTask1, completeTask} from "../actions/taskAction"
+import {fetchOps, blockOp} from "../actions/opAction"
 import {createDesk, fetchDesks, setDesk, deleteDesk} from "../actions/deskAction";
 import {useDispatch, useSelector} from 'react-redux'
 import {AddFormDesk} from "../components/AddFormDesk";
-import {ListWheel} from "../components/ListWheel";
-
 import Cookies from "js-cookie";
+import {ListOperations} from "../components/ListOperations";
 
 export const CreatePage = () => {
     const [asideOpen, setAsideOpen] = useState(false)
@@ -16,12 +15,11 @@ export const CreatePage = () => {
     const curDesk = useSelector(state => state.desk.currentDesk)
 
     useEffect(() => {
-        dispatch(fetchTask(curDesk, userId))
+        dispatch(fetchOps())
         dispatch(fetchDesks(userId))
-    }, [fetchTask, fetchDesks, dispatch])
+    }, [fetchOps, fetchDesks, dispatch])
 
-    let task = useSelector(state => state.taskReducer.tasks)
-    const desk = useSelector(state => state.desk.desks)
+    let ops = useSelector(state => state.opReducer.ops)
 
     function asideFunction(event) {
         let neibor = event.target.nextSibling;
@@ -53,32 +51,18 @@ export const CreatePage = () => {
               <div className="sectionContainer">
                   <section className="mainSection">
                       <section className="tasksMain">
-                          <ListWheel
-                          tasks={task}
-                          deleteTask={(id) => {
-                              dispatch(deleteTask1(id))
-                              //dispatch(fetchTask(curDesk, userId))
-                          }}
-                          createTask={(value, date) => {
-                              dispatch(createTask1(value, curDesk, userId, date))
-                          }}
-                          completeTask={(id, flag) => dispatch(completeTask(id, flag))}>
+                          <ListOperations
+                          ops={ops}
+                          blockOp={(id) => { dispatch(blockOp(id)) }}>
 
-                          </ListWheel>
+                          </ListOperations>
                       </section>
                       <aside className="asideMenu">
                           <div className="asideButton" onClick={asideFunction}>
                               |||
                           </div>
                           <div className="asideForm">
-                              <DeskList
-                                desks={desk}
-                                setNewDesk={(deskId,deskInf) => {
-                                    dispatch(setDesk(deskInf))
-                                    dispatch(fetchTask(deskInf, userId))
-                                }}
-                                deleteDesk={ (index, deskInfo) => dispatch(deleteDesk(index, deskInfo))}
-                              />
+
                               <AddFormDesk createNewDesk={ (value) => {
                                   dispatch(createDesk(value, userId))
                               }} />

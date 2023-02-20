@@ -28,7 +28,7 @@
 
 .column {
     float: left;
-    width: 32%;
+    width: 60%;
     padding: 0 5px 5px 5px;
     height: 92%;
     overflow: hidden;
@@ -222,4 +222,15 @@
 .error{
     color: red;
     text-align: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+#type1 {
+    justify-content: space-between;
 }

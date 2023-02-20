@@ -11,7 +11,6 @@ export const AddFormTask = ({createTask, date}) => {
             setValue('')
         }
     }
-
     const createHandler = async (e) => {
         if (e.key === 'Enter'){
             try{
