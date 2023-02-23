@@ -620,8 +620,8 @@ main.mainApp .sectionContainer {
 }
 
 main.mainApp section.mainSection {
-    width: calc(100% - 38*2px);
-    height: 90%;
+    width: 95%;
+    height: 98%;
     display: flex;
     justify-content: space-between;
 }
@@ -629,7 +629,7 @@ main.mainApp section.mainSection {
 main.mainApp section.mainSection section.tasksMain {
     height: 100%;
     background-color: #fff;
-    width: calc(100% - 19px - 60px);
+    width: 98%;
     border-radius: 32px;
     display: flex;
     justify-content: center;

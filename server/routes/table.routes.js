@@ -4,35 +4,52 @@ const router = Router()
 
 // /api/table/...
 
-router.post('/getOps', async (req,res) => {
+router.get('/getclients', async (req,res) => {
     try {
-        const date = req.body
-        const ops = await db.query('SELECT * from transaction WHERE data = ($1)', [date])
-        res.json(ops)
+        const clients = await db.query('SELECT * from client')
+        res.json(clients.rows)
 
     } catch (e) {
         res.status(500).json({message: `Something go wrong... ${e}`})
     }
 })
 
-
-router.post('/createdesk', async (req,res) => {
+router.get('/getcurrency', async (req,res) => {
     try {
-
+        const cur = await db.query('SELECT * from currency')
+        res.json(cur.rows)
 
     } catch (e) {
-        res.status(500).json({message: 'Something go wrong...'})
+        res.status(500).json({message: `Something go wrong... ${e}`})
     }
 })
 
-router.post('/deletedesk', async (req,res) => {
+router.get('/getatm', async (req,res) => {
     try {
-
-        const op = req.body
-        await db.query("DELETE FROM transaction WHERE id = ($1)", [op])
+        const atm = await db.query('SELECT * from atm')
+        res.json(atm.rows)
 
     } catch (e) {
-        res.status(500).json({message: `Something go wrong...${e}`})
+        res.status(500).json({message: `Something go wrong... ${e}`})
+    }
+})
+
+router.get('/getaccount', async (req,res) => {
+    try {
+        const acc = await db.query('SELECT * from account')
+        res.json(acc.rows)
+
+    } catch (e) {
+        res.status(500).json({message: `Something go wrong... ${e}`})
+    }
+})
+
+router.get('/getcards', async (req,res) => {
+    try {
+        const card = await db.query('SELECT * from card')
+        res.json(card.rows)
+    } catch (e) {
+        res.status(500).json({message: `Something go wrong... ${e}`})
     }
 })
 

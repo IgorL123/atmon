@@ -1,15 +1,16 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "../styles/button&menu.css"
 
 
 export const List = ({ops, blockOp, date}) => {
-    const blockHandler = async (event, opId) => {
-        //event.preventDefault()
+
+    const blockHandler = async (opId) => {
         try {
             blockOp(opId)
         } catch (e) { console.log(e) }
     }
-    ops = ops.filter(op => op.date.day === date.day)
+
+    ops = ops.filter(op => new Date(op.date).getDay() === date.getDay())
     return (
 
         <ul className="collection">
@@ -22,6 +23,7 @@ export const List = ({ops, blockOp, date}) => {
                     <th>Value</th>
                     <th>Currency</th>
                     <th>Place</th>
+                    <th>Blocking</th>
                 </tr>
                 {ops.map(op => (
                     <tr>
@@ -31,10 +33,9 @@ export const List = ({ops, blockOp, date}) => {
                     <th>{op.value}</th>
                     <th>{op.name}</th>
                     <th>{op.place}</th>
-                        <th>{op.blocked}</th>
-
+                    <th className="blocked" >{op.blocked ? "YES" : "NO"}</th>
                     </tr>
-                    ))}
+                ))}
             </table>
         </ul>
 

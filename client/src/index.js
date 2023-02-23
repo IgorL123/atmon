@@ -12,10 +12,9 @@ const unsubscribe = store.subscribe(() =>
 unsubscribe()
 
 ReactDOM.render(
-        <Provider store={store}>
-            <App />
-        </Provider>,
+    <Provider store={store}>
+        <App />
+    </Provider>,
 
-  document.getElementById('root')
+    document.getElementById('root')
 );
-

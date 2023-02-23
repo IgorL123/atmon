@@ -7,8 +7,6 @@ import {connect, useDispatch} from "react-redux";
 export const Navbar = () => {
 
     const dispatch = useDispatch()
-
-
     const logoutHandler = event => {
         event.preventDefault()
 
@@ -21,9 +19,13 @@ export const Navbar = () => {
 
     return (
       <nav className="appNavBar">
-        <span id="navLogo">Logo</span>
+        <span id="navLogo">Monitoring</span>
         <ul id="nav-mobile" className="">
-          <li><button onClick={logoutHandler}>EXIT</button></li>
+          <li>
+              <button className="navbutton"> CREATE </button>
+              <button className="navbutton"> USERS </button>
+              <button className="navbutton" onClick={logoutHandler}>EXIT</button>
+          </li>
         </ul>
       </nav>
     )

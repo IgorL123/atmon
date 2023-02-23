@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import {opRootReducer} from "./opReducer.js";
 import authReducer from "./authReducer";
-import {deskReducer} from "./deskReducer";
+import {tableReducer} from "./tableReducer";
 import alertReducer from "./alertReducer";
 
 
@@ -9,7 +9,7 @@ import alertReducer from "./alertReducer";
 const rootReducer = combineReducers({
     auth: authReducer,
     opReducer : opRootReducer,
-    desk: deskReducer,
+    table: tableReducer,
     alert: alertReducer,
 
 })

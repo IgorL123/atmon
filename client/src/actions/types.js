@@ -14,14 +14,16 @@ export const BLOCK_OPS_SUCCESS = "delete_task_success"
 export const BLOCK_OPS_FAIL = "delete_task_fail"
 
 
-export const GET_DESKS_SUCCESS = "get_desks_success"
-export const GET_DESKS_FAIL = "get_desks_fail"
-export const CREATE_DESK_SUCCESS = "create_desk_success"
-export const CREATE_DESK_FAIL = "create_desk_fail"
-export const DELETE_DESK_SUCCESS = "delete_desk_success"
-export const DELETE_DESK_FAIL = "create_desk_fail"
-export const SET_DESK_SUCCESS = "set_desk_success"
-
+export const GET_CLIENTS_SUCCESS = "get_clients_success"
+export const GET_CLIENTS_FAIL = "get_clients_fail"
+export const GET_CARDS_SUCCESS = "get_cards_success"
+export const GET_CARDS_FAIL = "get_cards_fail"
+export const GET_CUR_SUCCESS = "get_cur_success"
+export const GET_CUR_FAIL = "get_cur_fail"
+export const GET_ATM_SUCCESS = "get_atm_success"
+export const GET_ATM_FAIL = "get_atm_fail"
+export const GET_AC_SUCCESS = "get_ac_success"
+export const GET_AC_FAIL = "get_ac_fail"
 
 
 

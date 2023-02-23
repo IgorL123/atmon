@@ -25,7 +25,6 @@ router.post(
         const {email, password} = req.body
 
         const exist = await db.query('SELECT email FROM "users" WHERE email = ($1)', [email])
-
         if (exist.rowCount !== 0){
             return res.status(400).send('User already exist')
         }
@@ -36,7 +35,7 @@ router.post(
 
 
     } catch (e) {
-        res.status(500).send(e.array()[0])
+        res.status(500).send(e)
     }
 })
 
