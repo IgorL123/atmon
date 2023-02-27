@@ -1,7 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {Navbar} from "../components/Navbar"
-import {fetchOps, blockOp} from "../actions/opAction"
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {ListOperations} from "../components/ListOperations";
 import {ListClients} from "../components/ListClients";
 import {fetchClients} from "../actions/tableAction";
@@ -15,12 +14,10 @@ export const CreatePage = () => {
     const [startTable, setTable] = useState('transactions')
 
     useEffect(() => {
-        dispatch(fetchOps())
         dispatch(fetchClients())
         setTable(startTable)
-    }, [fetchOps, fetchClients, startTable, dispatch])
+    }, [startTable, dispatch])
 
-    let ops = useSelector(state => state.opReducer.ops)
 
     return (
       <main className="mainApp">
@@ -30,9 +27,7 @@ export const CreatePage = () => {
                   <section className="mainSection">
                       <section className="tasksMain">
                           { startTable === "transactions" &&
-                              <ListOperations
-                                  ops={ops}
-                                  blockOp={(id) => { dispatch(blockOp(id))}}>
+                              <ListOperations>
                               </ListOperations>
                           }
                           { startTable === "clients" &&
@@ -50,19 +45,15 @@ export const CreatePage = () => {
                           {startTable === "atms" &&
                               <ListAtms></ListAtms>
                           }
-
-                          <div className="row" >
-                          <li >
+                          <div >
                               <button className="button-6" onClick={() => setTable("clients")}>Clients</button>
                               <button className="button-6" onClick={() => setTable("cur")}>Currencies</button>
                               <button className="button-6" onClick={() => setTable("accounts")}>Accounts</button>
-                              <li >
-                                  <button className="button-6" onClick={() => setTable("atms")}>ATMS</button>
-                                  <button className="button-6" onClick={() => setTable("cards")}>Cards</button>
-                                  <button className="button-6" onClick={() => setTable("transactions")}>Transactions</button>
-                              </li>
-                          </li>
-                      </div>
+                              <button className="button-6" onClick={() => setTable("atms")}>ATMS</button>
+                              <button className="button-6" onClick={() => setTable("cards")}>Cards</button>
+                              <button className="button-6" onClick={() => setTable("transactions")}>Transactions</button>
+
+                          </div>
                       </section>
                   </section>
               </div>

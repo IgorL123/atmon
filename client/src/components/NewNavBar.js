@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {NewAuthComponent} from "./NewAuthConponent"
+import React from 'react';
 
 export const NewNavBar = ({openDisplaySignIn, openDisplaySignUp, display, closeDisplay, authType, changeAuthType}) => {
 // export const NewNavBar = () => {

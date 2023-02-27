@@ -245,3 +245,15 @@
     font-size: large;
 
 }
+
+.column-1{
+    align-content: space-between;
+    display: flex;
+}
+
+
+.parent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

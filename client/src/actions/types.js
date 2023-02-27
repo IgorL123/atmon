@@ -25,6 +25,12 @@ export const GET_ATM_FAIL = "get_atm_fail"
 export const GET_AC_SUCCESS = "get_ac_success"
 export const GET_AC_FAIL = "get_ac_fail"
 
+export const GET_USERS_SUCCESS = "get_users_success"
+export const GET_USERS_FAIL = "get_users_fail"
+export const ADD_USER_SUCCESS = "add_user_success"
+export const ADD_USER_FAIL = "add_user_fail"
+export const DELETE_USER_SUCCESS = "DELETE_user_success"
+export const DELETE_USER_FAIL = "DELETE_user_fail"
 
 
 

@@ -7,11 +7,10 @@ import {
 import axios from "axios"
 import {crypto} from "../cipher/crypto"
 
-
-export const fetchOps = () => async (dispatch) => {
+export const fetchOps = (date) => async (dispatch) => {
     try {
 
-        const data = await axios.post("api/op/get")
+        const data = await axios.post("api/op/get", {date})
 
         dispatch({
             type: GET_OPS_SUCCESS,
@@ -26,11 +25,10 @@ export const fetchOps = () => async (dispatch) => {
 
 export const blockOp = (index) => async (dispatch) => {
     try {
-        const blocked = await axios.post('/api/op/block', {index})
-
+        await axios.post('/api/op/block', {index})
         dispatch({
             type: BLOCK_OPS_SUCCESS,
-            blockedOp: blocked
+            blockedOp: index
         })
     } catch (e) {
         console.log(e)

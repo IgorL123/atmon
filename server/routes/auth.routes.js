@@ -54,10 +54,10 @@ router.post('/login',
             }
             const {email, password} = req.body
 
-            const user = await db.query("SELECT id, email, password FROM users WHERE email = ($1)", [email])
+            const user = await db.query("SELECT id, email, password, superuser FROM users WHERE email = ($1)", [email])
 
             if (user.rowCount === 0){
-                res.status(400).send("Wrong email or password")
+                return res.status(400).send("Wrong email or password")
             }
             const isMatch = await bcrypt.compare(password, user.rows[0].password)
 
@@ -66,11 +66,11 @@ router.post('/login',
             }
 
             const token = jwt.sign(
-                {userId: user.rows[0].id },
+                {userId: user.rows[0].id, superuser: user.rows[0].superuser},
                 config.get('jwtSecret'),
-                {expiresIn: '1h'}
+                {expiresIn: '2min'}
             )
-            res.json({token: token, userID: user.rows[0].id })
+            res.json({token: token, userID: user.rows[0].id, superuser: user.rows[0].superuser})
 
         } catch (e) {
             res.status(500).send( `${e} Something went wrong... `)

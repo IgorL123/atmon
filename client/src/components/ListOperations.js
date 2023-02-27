@@ -1,13 +1,31 @@
 import React, {useEffect, useState} from "react"
-import {List} from "./List";
-import {ListClients} from "./ListClients";
+import {blockOp, fetchOps} from "../actions/opAction";
+import {useDispatch, useSelector} from "react-redux";
 
-export const ListOperations = ({ops, blockOp}) => {
+function formatDate(date) { // YYYY-MM-DD
+    let dd = date.getDate();
+    if (dd < 10) dd = '0' + dd;
+
+    let mm = date.getMonth() + 1;
+    if (mm < 10) mm = '0' + mm;
+
+    let yy = date.getFullYear();
+    if (yy < 10) yy = '0' + yy;
+
+    return yy + '-' + mm + '-' + dd;
+}
+
+export const ListOperations = () => {
+    let ops = useSelector(state => state.opReducer.ops)
+    const isSuperUser = useSelector(state => state.auth.isSuperUser)
     const [startDate, setDate] = useState( new Date() )
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setDate(startDate)
-    },[startDate])
+        dispatch(fetchOps(formatDate(startDate)))
+    },[fetchOps, startDate, dispatch])
+
 
     const prettyDate = (date) => {
         const months = ["January","February","March","April","May","June","July","August","September",
@@ -17,19 +35,14 @@ export const ListOperations = ({ops, blockOp}) => {
     }
 
     let sum = 0;
-    let trans = 0;
     ops.map(op => {
-        if (op.bank_name !== "СберБанк" && new Date(op.date).getDay() === startDate.getDay()){
+        if (op.bank_name !== "СберБанк" && new Date(op.date).getDate() === startDate.getDate()){
            sum = sum + Math.abs(op.value * 0.012 * op.exchange_ration2rub);
-        }
-        if (new Date(op.date).getDay() === startDate.getDay()){
-            trans += 1;
         }
     })
 
-
     return (
-        <div className="row">
+        <div className="parent">
             <div className="upperPart" >
 
                 <button
@@ -50,7 +63,7 @@ export const ListOperations = ({ops, blockOp}) => {
                     {`Day commission : ${Math.round(sum)}`}
                 </div>
                 <div className="total">
-                    {`Day transactions : ${trans}`}
+                    {`Day transactions : ${ops.length}`}
                 </div>
             </div>
 
@@ -58,11 +71,36 @@ export const ListOperations = ({ops, blockOp}) => {
                 <div className="column" >
                     <h3> {prettyDate(startDate)}</h3>
                     <section className="taskList" >
-                        <List
-                            ops={ops}
-                            blockOp={blockOp}
-                            date={startDate}>
-                        </List>
+                        <ul className="collection">
+                            <table>
+                                <caption></caption>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Card</th>
+                                    <th>Atm</th>
+                                    <th>Value</th>
+                                    <th>Currency</th>
+                                    <th>Place</th>
+                                    <th>Blocking</th>
+                                </tr>
+                                {ops.map(op => (
+                                    <tr key={op.id}>
+                                        <th>{op.account_id}</th>
+                                        <th>{op.card_id}</th>
+                                        <th>{op.atm_id}</th>
+                                        <th>{op.value}</th>
+                                        <th>{op.name}</th>
+                                        <th>{op.place}</th>
+                                        {isSuperUser &&
+                                            <th className="blocked" onClick={(index) => dispatch(blockOp(op.id))}>{op.blocked ? "YES" : "NO"}</th>
+                                        }
+                                        {!isSuperUser &&
+                                            <th className="blocked">{op.blocked ? "YES" : "NO"}</th>
+                                        }
+                                    </tr>
+                                ))}
+                            </table>
+                        </ul>
                     </section>
                 </div>
             )}

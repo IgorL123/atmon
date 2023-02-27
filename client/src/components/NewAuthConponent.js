@@ -25,7 +25,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
   // Auth
 
   const message = useMessage();
-  const {loading, error, clearError} = useHttp();
+  const {error, clearError} = useHttp();
 
   const [form, setForm] = useState({
     email: '', password: ''

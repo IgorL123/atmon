@@ -11,7 +11,6 @@ const appState = {
 }
 
 export const opRootReducer = (state = appState, action) => {
-
     switch(action.type){
         case GET_OPS_SUCCESS:
             return {
@@ -20,10 +19,13 @@ export const opRootReducer = (state = appState, action) => {
                 ops: action.ops.data
             }
         case BLOCK_OPS_SUCCESS:
+            const found = state.ops.find(op => op.id === action.blockedOp)
+            found.blocked = !found.blocked
             return{
                 ...state,
                 isLoading: false,
-                ops : action.ops
+                ops: [found].concat(state.ops.filter(op => op.id !== action.blockedOp))
+
         }
         case GET_OPS_FAIL:
         case BLOCK_OPS_FAIL:

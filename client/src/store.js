@@ -1,14 +1,14 @@
-import { createStore, applyMiddleware} from 'redux'
 import {configureStore} from "@reduxjs/toolkit";
 import rootReducer from "./reducer";
-
 import Cookies from 'js-cookie';
 
 let isAuth;
 isAuth = !!Cookies.get('token');
+let isSuper = !!Cookies.get('superuser')
 
 const InitialState = {auth:{
     isAuthenticated: isAuth,
+    isSuperUser: isSuper,
     }}
 
 const checkAuthMiddleware = storeAPI => next => action => {

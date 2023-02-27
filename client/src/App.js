@@ -6,15 +6,13 @@ import {Loader} from "./components/Loader"
 import {MainPage} from "./pages/MainPage"
 import {CreatePage} from "./pages/CreatePage"
 import {useSelector} from "react-redux"
-import {FormNewTask} from "./components/Form"
-import {List} from "./components/List"
-
-
+import {UsersPage} from "./pages/UsersPage";
 
 function App() {
     const {ready} = useAuth()
     const state = useSelector(state => state.auth.isAuthenticated)
     const loading = useSelector(state => state.auth.isLoading)
+    const sup = useSelector(state => state.auth.isSuperUser)
 
     if (!ready) {
         return <Loader />
@@ -28,8 +26,11 @@ function App() {
                         <Route path="/create" exact component={CreatePage}>
                         <CreatePage />
                     </Route>
-                    <Route path="/create" component={FormNewTask}> </Route>
-                    <Route path="/create" component={List}> </Route>
+                        {sup &&
+                            <Route path="/users" component={UsersPage}>
+                                <UsersPage/>
+                            </Route>
+                        }
                 <Redirect to="/create" />
             </Switch>
             </Router>

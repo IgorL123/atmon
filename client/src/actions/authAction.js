@@ -17,7 +17,7 @@ export const signup = (form) =>  async dispatch => {
             type: USER_LOADING,
             payload: 0
         })
-        const data = await axios.post("/api/auth/register", form)
+        await axios.post("/api/auth/register", form)
         dispatch(login(form))
 
     } catch (e) {
@@ -54,7 +54,6 @@ export const logout = () =>  async dispatch => {
     try {
         dispatch({
             type: LOGOUT_SUCCESS,
-
         })
 
     } catch (e) { console.log(e.response)}

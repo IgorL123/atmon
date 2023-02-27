@@ -13,7 +13,6 @@ router.get('/getclients', async (req,res) => {
         res.status(500).json({message: `Something go wrong... ${e}`})
     }
 })
-
 router.get('/getcurrency', async (req,res) => {
     try {
         const cur = await db.query('SELECT * from currency')

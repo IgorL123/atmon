@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 const initialState = {
     token: Cookies.get('token'),
     isAuthenticated: null,
+    isSuperUser: null,
     isLoading: false,
     userId: Cookies.get('userID'),
 }
@@ -61,10 +62,12 @@ export default function authReducer(state = initialState, action) {
         case LOGIN_SUCCESS:
             Cookies.set('token', payload.data.token, { expires: 1, path: ''});
             Cookies.set('userID', payload.data.userID, { expires: 1, path: ''});
+            Cookies.set('superuser', payload.data.superuser, {expires: 1, path: ' '});
             return {
                 ...state,
                 isAuthenticated: true,
                 isLoading: false,
+                isSuperUser: payload.data.superuser,
                 token: payload.data.token,
                 userId: payload.data.userID
             }
