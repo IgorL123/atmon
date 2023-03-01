@@ -5,12 +5,27 @@ import {
     GET_OPS_SUCCESS,
 } from "./types"
 import axios from "axios"
-import {crypto} from "../cipher/crypto"
 
 export const fetchOps = (date) => async (dispatch) => {
     try {
 
         const data = await axios.post("api/op/get", {date})
+
+        dispatch({
+            type: GET_OPS_SUCCESS,
+            ops: data,
+        })
+
+    } catch (e) {
+        console.log(e)
+        dispatch({ type: GET_OPS_FAIL })
+    }
+}
+
+export const fetchOpsRange = (date1, date2) => async (dispatch) => {
+    try {
+
+        const data = await axios.post("api/op/getrange", {date1, date2})
 
         dispatch({
             type: GET_OPS_SUCCESS,

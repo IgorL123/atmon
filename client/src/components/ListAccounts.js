@@ -35,6 +35,7 @@ export const ListAccounts = () => {
                         <table>
                             <caption></caption>
                             <tr>
+                                <th>Id</th>
                                 <th>Number</th>
                                 <th>Balance</th>
                                 <th>Credit limit</th>
@@ -42,7 +43,8 @@ export const ListAccounts = () => {
                                 <th>Blocked</th>
                             </tr>
                             {accs.map(op => (
-                                <tr>
+                                <tr key={op.number}>
+                                    <th>{op.id}</th>
                                     <th>{op.number}   </th>
                                     <th>{op.value}</th>
                                     <th>{op.credit_limit}</th>

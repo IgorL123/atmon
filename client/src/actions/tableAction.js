@@ -66,6 +66,33 @@ export const fetchAtm = () => async (dispatch) => {
         dispatch({ type: GET_ATM_FAIL })
     }
 }
+export const fetchAtmDate = (date1, date2) => async (dispatch) => {
+    try {
+        const data = await axios.post("api/table/getatmsdata", {date1, date2})
+        dispatch({
+            type: GET_ATM_SUCCESS,
+            atms: data,
+        })
+
+    } catch (e) {
+        console.log(e)
+        dispatch({ type: GET_ATM_FAIL })
+    }
+}
+
+export const fetchCurDate = (date1, date2) => async (dispatch) => {
+    try {
+        const data = await axios.post("api/table/getcurrencydata", {date1, date2})
+        dispatch({
+            type: GET_CUR_SUCCESS,
+            currency: data,
+        })
+
+    } catch (e) {
+        console.log(e)
+        dispatch({ type: GET_CUR_FAIL })
+    }
+}
 
 export const fetchCurrency = () => async (dispatch) => {
     try {

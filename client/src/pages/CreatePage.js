@@ -18,7 +18,6 @@ export const CreatePage = () => {
         setTable(startTable)
     }, [startTable, dispatch])
 
-
     return (
       <main className="mainApp">
           <Navbar />

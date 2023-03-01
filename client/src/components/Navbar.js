@@ -1,9 +1,9 @@
 import React from 'react'
-import {NewAuthComponent} from "./NewAuthConponent";
 import "../styles/button&menu.css"
 import {logout} from "../actions/authAction";
 import {connect, useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {useAuth} from "../hooks/auth.hook";
 
 export const Navbar = () => {
     const isSuperUser = useSelector(state => state.auth.isSuperUser)
@@ -21,8 +21,11 @@ export const Navbar = () => {
         <span id="navLogo">Monitoring</span>
         <ul id="nav-mobile" className="">
           <li>
-              <Link to="/create">
+              <Link to="/info">
                   <button className="navbutton"> INFO </button>
+              </Link>
+              <Link to="/create">
+                  <button className="navbutton"> TABLES </button>
               </Link>
               {isSuperUser &&
               <Link to="/users">

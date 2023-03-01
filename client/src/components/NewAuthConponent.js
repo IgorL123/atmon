@@ -41,9 +41,24 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
+
+  const validate = (email, password) => {
+    const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regPassword = /^[a-zA-Z0-9]{3,20}$/
+    if(!regEmail.test(email)){
+      return false;
+    }
+    return regPassword.test(password);
+
+  }
+
   const registerHandler = async () => {
     try {
-      await dispatch(signup(form))
+      if (validate(form.email, form.password)){
+        await dispatch(signup(form))
+      } else {
+        message("Invalid email or password...")
+      }
     } catch (e) {
       console.log(e.message)
     }
@@ -51,7 +66,12 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
 
   const loginHandler = async () => {
     try {
-      await dispatch(login(form))
+      if (validate(form.email, form.password)){
+        await dispatch(login(form))
+      } else {
+        message("Invalid email or password...")
+      }
+
     } catch (e) {
     console.log(e.message)
     }
@@ -87,11 +107,11 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
   }, [authType])
 
   const onPressEnter = (e) => {
-    if (e.key === 'Enter'){
-      if(authType === "signIn") {
-        loginHandler();
+    if (e.key === 'Enter') {
+      if (authType === "signIn") {
+        loginHandler()
       } else {
-        registerHandler();
+        registerHandler()
       }
     }
   }
@@ -106,6 +126,8 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
       signUpInButton.onclick      = registerHandler;
     }
   }, [authType, form])
+
+
 
   let text = '';
   if (errorText) {
@@ -148,6 +170,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
                   value={form.email}
                   onChange={changeHandler}
                   onKeyPress={onPressEnter}
+                  maxLength="40"
               />
             </div>
 
@@ -160,6 +183,7 @@ export const NewAuthComponent = ({display, closeDisplay, authType, changeAuthTyp
                   value={form.password}
                   onChange={changeHandler}
                   onKeyPress={onPressEnter}
+                  maxLength="20"
               />
             </div>
 

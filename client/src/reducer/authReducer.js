@@ -15,9 +15,10 @@ import Cookies from "js-cookie";
 const initialState = {
     token: Cookies.get('token'),
     isAuthenticated: null,
-    isSuperUser: null,
+    isSuperUser: Cookies.set(false),
     isLoading: false,
     userId: Cookies.get('userID'),
+    time: Cookies.set(new Date())
 }
 
 export default function authReducer(state = initialState, action) {
@@ -53,6 +54,8 @@ export default function authReducer(state = initialState, action) {
         case LOGOUT_SUCCESS:
             Cookies.remove('token');
             Cookies.remove('userID');
+            Cookies.remove('superuser')
+            Cookies.remove('time')
             return {
                 ...state,
                 isAuthenticated: false,
@@ -62,14 +65,16 @@ export default function authReducer(state = initialState, action) {
         case LOGIN_SUCCESS:
             Cookies.set('token', payload.data.token, { expires: 1, path: ''});
             Cookies.set('userID', payload.data.userID, { expires: 1, path: ''});
-            Cookies.set('superuser', payload.data.superuser, {expires: 1, path: ' '});
+            Cookies.set('superuser', payload.data.superuser, {expires: 1, path: ''});
+            Cookies.set('time', new Date(), {expires: 1, path: ''})
             return {
                 ...state,
                 isAuthenticated: true,
                 isLoading: false,
                 isSuperUser: payload.data.superuser,
                 token: payload.data.token,
-                userId: payload.data.userID
+                userId: payload.data.userID,
+                time: new Date()
             }
         case LOGIN_FAIL:
             return {

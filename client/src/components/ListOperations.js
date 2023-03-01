@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react"
 import {blockOp, fetchOps} from "../actions/opAction";
 import {useDispatch, useSelector} from "react-redux";
+import {useAuth} from "../hooks/auth.hook";
 
-function formatDate(date) { // YYYY-MM-DD
+export function formatDate(date) { // YYYY-MM-DD
     let dd = date.getDate();
     if (dd < 10) dd = '0' + dd;
 
@@ -17,9 +18,10 @@ function formatDate(date) { // YYYY-MM-DD
 
 export const ListOperations = () => {
     let ops = useSelector(state => state.opReducer.ops)
-    const isSuperUser = useSelector(state => state.auth.isSuperUser)
+    let isSuperUser = useSelector(state => state.auth.isSuperUser)
     const [startDate, setDate] = useState( new Date() )
     const dispatch = useDispatch()
+    const {ready, sUser} = useAuth()
 
     useEffect(() => {
         setDate(startDate)
@@ -40,9 +42,9 @@ export const ListOperations = () => {
            sum = sum + Math.abs(op.value * 0.012 * op.exchange_ration2rub);
         }
     })
-
+    if (isSuperUser === null) {isSuperUser = false}
     return (
-        <div className="parent">
+        <div className="row">
             <div className="upperPart" >
 
                 <button
@@ -95,7 +97,7 @@ export const ListOperations = () => {
                                             <th className="blocked" onClick={(index) => dispatch(blockOp(op.id))}>{op.blocked ? "YES" : "NO"}</th>
                                         }
                                         {!isSuperUser &&
-                                            <th className="blocked">{op.blocked ? "YES" : "NO"}</th>
+                                            <th className="blocked" onClick={() => console.log("No Asses")}>{op.blocked ? "YES" : "NO"}</th>
                                         }
                                     </tr>
                                 ))}

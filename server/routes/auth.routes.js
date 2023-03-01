@@ -6,6 +6,7 @@ const {check, validationResult} = require('express-validator')
 const db = require('../database')
 const router = Router()
 
+
 // /api/auth/register
 router.post(
     '/register',
@@ -53,7 +54,6 @@ router.post('/login',
                 return res.status(400).send(errors.array()[0].msg)
             }
             const {email, password} = req.body
-
             const user = await db.query("SELECT id, email, password, superuser FROM users WHERE email = ($1)", [email])
 
             if (user.rowCount === 0){

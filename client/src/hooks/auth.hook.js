@@ -8,15 +8,12 @@ export const useAuth = () => {
     const [ready, setReady] = useState(false)
     const [userId, setUserId] = useState(null)
 
-
     const login = useCallback((jwtToken, id) => {
         setToken(jwtToken)
         setUserId(id)
-
         localStorage.setItem(storageName, JSON.stringify({
             userId: id, token: jwtToken
         }))
-
     }, [])
 
     const logout = useCallback(() => {
@@ -27,7 +24,6 @@ export const useAuth = () => {
 
     useEffect(() => {
         const data =  JSON.stringify(localStorage.getItem(storageName))
-        const token = Cookies.get('token');
 
         if (data && data.token){
             login(data.token, data.userId)

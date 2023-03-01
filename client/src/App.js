@@ -7,36 +7,38 @@ import {MainPage} from "./pages/MainPage"
 import {CreatePage} from "./pages/CreatePage"
 import {useSelector} from "react-redux"
 import {UsersPage} from "./pages/UsersPage";
+import {InfoPage} from "./pages/InfoPage";
 
 function App() {
     const {ready} = useAuth()
     const state = useSelector(state => state.auth.isAuthenticated)
+    const sUser = useSelector(state => state.auth.isSuperUser)
     const loading = useSelector(state => state.auth.isLoading)
-    const sup = useSelector(state => state.auth.isSuperUser)
 
     if (!ready) {
         return <Loader />
     }
-
     if(state && !loading){
         return (
             <Fragment>
                 <Router>
                     <Switch>
                         <Route path="/create" exact component={CreatePage}>
-                        <CreatePage />
-                    </Route>
-                        {sup &&
-                            <Route path="/users" component={UsersPage}>
-                                <UsersPage/>
+                            <CreatePage />
+                        </Route>
+                        <Route path="/info" exact component={InfoPage}>
+                            <InfoPage />
+                        </Route>
+                        {sUser &&
+                            <Route path="/users" exact component={UsersPage}>
+                                <UsersPage />
                             </Route>
                         }
-                <Redirect to="/create" />
-            </Switch>
-            </Router>
+                        <Redirect to="/info" />
+                    </Switch>
+                </Router>
             </Fragment>
         )}
-
 
   return (
       <Fragment>
