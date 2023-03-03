@@ -31,7 +31,7 @@ router.post(
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        await db.query('INSERT INTO users(email, password) VALUES($1, $2)', [email , hashedPassword])
+        await db.query('INSERT INTO users(email, password, superuser) VALUES($1, $2, $3)', [email , hashedPassword, false])
         res.status(201).send('User was created')
 
 

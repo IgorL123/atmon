@@ -1,12 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {Fragment, useEffect, useState} from "react";
-import {fetchAtmDate, fetchCurDate} from "../actions/tableAction";
+import {fetchAtmDate, fetchChart, fetchCurDate} from "../actions/tableAction";
 import {Navbar} from "../components/Navbar";
 import {fetchOpsRange} from "../actions/opAction";
 import {formatDate} from "../components/ListOperations"
 import {List} from "../components/List";
 import {ListGrouped} from "../components/ListGrouped";
 import {ListCurGrouped} from "../components/ListCurGroup";
+import {Chart} from "../components/Chart";
 
 export const InfoPage = () => {
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ export const InfoPage = () => {
     let ops = useSelector(state => state.opReducer.ops)
     let atms = useSelector(state => state.table.atms)
     let curs = useSelector(state => state.table.currency)
+    const data = useSelector(state => state.table.chart)
 
     useEffect(() => {
         setDate(startDate)
@@ -23,6 +25,7 @@ export const InfoPage = () => {
         dispatch(fetchOpsRange(formatDate(startDate), formatDate(endDate)))
         dispatch(fetchAtmDate(formatDate(startDate), formatDate(endDate)))
         dispatch(fetchCurDate(formatDate(startDate), formatDate(endDate)))
+        dispatch(fetchChart(formatDate(startDate), formatDate(endDate)))
     },[fetchOpsRange, startDate, endDate, dispatch])
 
     let sum = 0;
@@ -66,7 +69,7 @@ export const InfoPage = () => {
                                 <button className="button-6" onClick={() => setTable('opers')}> Transactions</button>
                                 <button className="button-6" onClick={() => setTable('cur')}> Group by curs</button>
                                 <button className="button-6" onClick={() => setTable('com')}> Commissions</button>
-
+                                <button className="button-6" onClick={() => setTable('dyn')}> Commissions dynamic</button>
                                 <section className="taskList" >
                                     <ul className="collection">
                                         { table === 'opers' &&
@@ -84,6 +87,9 @@ export const InfoPage = () => {
                                         {table === 'com' &&
                                             <h3 align="center">{`Total commission:  ${Math.round(sum)} Rub`}</h3>
 
+                                        }
+                                        {table === 'dyn' &&
+                                            <Chart data={data}/>
                                         }
                                     </ul>
                                 </section>

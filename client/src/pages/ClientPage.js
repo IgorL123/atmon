@@ -1,11 +1,8 @@
-import React, {Fragment} from 'react';
 import {Navbar} from "../components/Navbar";
-import {ListUsers} from "../components/ListUsers";
-import {useDispatch} from "react-redux";
-import {addUser} from "../actions/userAction";
+import React, {Fragment} from "react";
+import {ListClientPage} from "../components/ListClientPage";
 
-export const UsersPage = () => {
-    const dispatch = useDispatch()
+export const ClientPage = () => {
     return (
         <main className="mainApp">
             <Navbar/>
@@ -13,8 +10,7 @@ export const UsersPage = () => {
                 <div className="sectionContainer">
                     <section className="mainSection">
                         <section className="tasksMain">
-
-                            <ListUsers addUser={(email, user) => dispatch(addUser(email, user))}></ListUsers>
+                                <ListClientPage/>
                         </section>
                     </section>
                 </div>

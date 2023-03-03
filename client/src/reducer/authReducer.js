@@ -15,10 +15,10 @@ import Cookies from "js-cookie";
 const initialState = {
     token: Cookies.get('token'),
     isAuthenticated: null,
-    isSuperUser: Cookies.set(false),
+    superuser:  Cookies.get('superuser'),
     isLoading: false,
     userId: Cookies.get('userID'),
-    time: Cookies.set(new Date())
+    time: Cookies.set('time', new Date())
 }
 
 export default function authReducer(state = initialState, action) {
@@ -71,7 +71,7 @@ export default function authReducer(state = initialState, action) {
                 ...state,
                 isAuthenticated: true,
                 isLoading: false,
-                isSuperUser: payload.data.superuser,
+                superuser: payload.data.superuser,
                 token: payload.data.token,
                 userId: payload.data.userID,
                 time: new Date()

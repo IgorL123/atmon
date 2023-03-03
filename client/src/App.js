@@ -8,12 +8,15 @@ import {CreatePage} from "./pages/CreatePage"
 import {useSelector} from "react-redux"
 import {UsersPage} from "./pages/UsersPage";
 import {InfoPage} from "./pages/InfoPage";
+import Cookies from "js-cookie";
+import {ClientPage} from "./pages/ClientPage";
 
 function App() {
     const {ready} = useAuth()
     const state = useSelector(state => state.auth.isAuthenticated)
-    const sUser = useSelector(state => state.auth.isSuperUser)
     const loading = useSelector(state => state.auth.isLoading)
+    let s = Cookies.get('superuser')
+    s = s === "true";
 
     if (!ready) {
         return <Loader />
@@ -29,11 +32,14 @@ function App() {
                         <Route path="/info" exact component={InfoPage}>
                             <InfoPage />
                         </Route>
-                        {sUser &&
+                        {s &&
                             <Route path="/users" exact component={UsersPage}>
                                 <UsersPage />
                             </Route>
                         }
+                        <Route path="/clients" exact component={ClientPage}>
+                            <ClientPage/>
+                        </Route>
                         <Redirect to="/info" />
                     </Switch>
                 </Router>

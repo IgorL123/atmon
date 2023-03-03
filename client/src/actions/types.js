@@ -32,6 +32,10 @@ export const ADD_USER_FAIL = "add_user_fail"
 export const DELETE_USER_SUCCESS = "DELETE_user_success"
 export const DELETE_USER_FAIL = "DELETE_user_fail"
 
+export const GET_CHART_SUCCESS = "get_chart_success"
+export const GET_CHART_FAIL = "get_chart_fail"
 
+export const ADD_CLIENT_SUCCESS = "add_client_success"
+export const ADD_CLIENT_FAIL = "add_client_fail"
 
 

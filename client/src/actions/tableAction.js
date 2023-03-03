@@ -8,7 +8,7 @@ import {
     GET_AC_SUCCESS,
     GET_CLIENTS_SUCCESS,
     GET_CUR_SUCCESS,
-    GET_CARDS_SUCCESS
+    GET_CARDS_SUCCESS, GET_CHART_SUCCESS, GET_CHART_FAIL, ADD_CLIENT_SUCCESS, ADD_CLIENT_FAIL
 } from "./types"
 import axios from "axios"
 
@@ -23,6 +23,20 @@ export const fetchClients = () => async (dispatch) => {
     } catch (e) {
         console.log(e)
         dispatch({ type: GET_CLIENTS_FAIL })
+    }
+}
+
+export const addClient = (name, email) => async (dispatch) => {
+    try {
+        await axios.post("api/table/getclients", {name, email})
+        dispatch({
+            type: ADD_CLIENT_SUCCESS,
+            newClient: [name, email],
+        })
+
+    } catch (e) {
+        console.log(e)
+        dispatch({ type: ADD_CLIENT_FAIL })
     }
 }
 export const fetchCards = () => async (dispatch) => {
@@ -66,6 +80,7 @@ export const fetchAtm = () => async (dispatch) => {
         dispatch({ type: GET_ATM_FAIL })
     }
 }
+
 export const fetchAtmDate = (date1, date2) => async (dispatch) => {
     try {
         const data = await axios.post("api/table/getatmsdata", {date1, date2})
@@ -77,6 +92,20 @@ export const fetchAtmDate = (date1, date2) => async (dispatch) => {
     } catch (e) {
         console.log(e)
         dispatch({ type: GET_ATM_FAIL })
+    }
+}
+
+export const fetchChart = (date1, date2) => async (dispatch) => {
+    try {
+        const data = await axios.post("api/table/getchart", {date1, date2})
+        dispatch({
+            type: GET_CHART_SUCCESS,
+            chart: data,
+        })
+
+    } catch (e) {
+        console.log(e)
+        dispatch({ type: GET_CHART_FAIL })
     }
 }
 

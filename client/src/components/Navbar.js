@@ -1,12 +1,13 @@
 import React from 'react'
 import "../styles/button&menu.css"
 import {logout} from "../actions/authAction";
-import {connect, useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {useAuth} from "../hooks/auth.hook";
+import Cookies from 'js-cookie';
 
 export const Navbar = () => {
-    const isSuperUser = useSelector(state => state.auth.isSuperUser)
+    let isSuperUser = Cookies.get('superuser')//useSelector(state => state.auth.isSuperUser)
+    isSuperUser = isSuperUser === "true";
     const dispatch = useDispatch()
     const logoutHandler = event => {
         event.preventDefault()
@@ -31,6 +32,15 @@ export const Navbar = () => {
               <Link to="/users">
                   <button className="navbutton"> USERS </button>
               </Link>}
+              <Link to="/clients">
+                  <button className="navbutton">CLIENTS</button>
+                  </Link>
+              {!isSuperUser &&
+                      <button className="navbutton" onClick={() => {
+                          alert("Access error")
+                      }}
+                      > USERS </button>
+              }
               <button className="navbutton" onClick={logoutHandler}>EXIT</button>
           </li>
         </ul>

@@ -5,19 +5,19 @@ import Cookies from 'js-cookie';
 
 let isAuth, isSuper;
 isAuth = !!Cookies.get('token');
-isSuper = !!Cookies.get('superuser')
+isSuper = Cookies.get('superuser');
 
 const InitialState = {auth:{
     isAuthenticated: isAuth,
-    isSuperUser: isSuper,
+    isSuperUser : isSuper,
         time : Cookies.get('time')
     }}
 
 const checkAuthMiddleware = storeAPI => next => action => {
-    if (new Date() - storeAPI.getState().auth.time >= 120000 && !storeAPI.getState().auth.superuser){
-        storeAPI.getState().auth.isAuthenticated = false
+    if (new Date() - storeAPI.getState().auth.time >= 120000){
+        //storeAPI.getState().auth.isAuthenticated = false
     } else{
-        storeAPI.getState().auth.time = new Date()
+        //storeAPI.getState().auth.time = new Date()
     }
     let result = next(action)
     //console.log("Checking auth....")

@@ -40,11 +40,19 @@ export const fetchOpsRange = (date1, date2) => async (dispatch) => {
 
 export const blockOp = (index) => async (dispatch) => {
     try {
-        await axios.post('/api/op/block', {index})
-        dispatch({
-            type: BLOCK_OPS_SUCCESS,
-            blockedOp: index
-        })
+        const res = await axios.post('/api/op/block', {index})
+        console.log(res)
+        if (res.data === 100){
+            dispatch({
+                type: BLOCK_OPS_SUCCESS,
+                blockedOp: index
+            })
+        } else {
+            dispatch({
+                type: BLOCK_OPS_FAIL,
+                payload: res.data
+            })
+        }
     } catch (e) {
         console.log(e)
         dispatch({type: BLOCK_OPS_FAIL, payload: e.message})

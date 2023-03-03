@@ -1,6 +1,4 @@
 import {useState, useCallback, useEffect} from 'react'
-import Cookies from 'js-cookie'
-
 const storageName = 'userData'
 
 export const useAuth = () => {

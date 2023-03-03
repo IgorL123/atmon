@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {blockOp, fetchOps} from "../actions/opAction";
 import {useDispatch, useSelector} from "react-redux";
-import {useAuth} from "../hooks/auth.hook";
+import Cookies from "js-cookie";
 
 export function formatDate(date) { // YYYY-MM-DD
     let dd = date.getDate();
@@ -18,10 +18,10 @@ export function formatDate(date) { // YYYY-MM-DD
 
 export const ListOperations = () => {
     let ops = useSelector(state => state.opReducer.ops)
-    let isSuperUser = useSelector(state => state.auth.isSuperUser)
     const [startDate, setDate] = useState( new Date() )
     const dispatch = useDispatch()
-    const {ready, sUser} = useAuth()
+    let sUser = Cookies.get('superuser')
+    sUser = sUser === "true"
 
     useEffect(() => {
         setDate(startDate)
@@ -42,7 +42,6 @@ export const ListOperations = () => {
            sum = sum + Math.abs(op.value * 0.012 * op.exchange_ration2rub);
         }
     })
-    if (isSuperUser === null) {isSuperUser = false}
     return (
         <div className="row">
             <div className="upperPart" >
@@ -93,10 +92,10 @@ export const ListOperations = () => {
                                         <th>{op.value}</th>
                                         <th>{op.name}</th>
                                         <th>{op.place}</th>
-                                        {isSuperUser &&
+                                        {sUser &&
                                             <th className="blocked" onClick={(index) => dispatch(blockOp(op.id))}>{op.blocked ? "YES" : "NO"}</th>
                                         }
-                                        {!isSuperUser &&
+                                        {!sUser &&
                                             <th className="blocked" onClick={() => console.log("No Asses")}>{op.blocked ? "YES" : "NO"}</th>
                                         }
                                     </tr>

@@ -17,6 +17,7 @@
     "react-notification-system-redux": "^2.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "recharts": "^2.4.3",
     "redux": "^4.1.0",
     "redux-notifications": "^4.0.1",
     "simple-crypto-js": "^3.0.0",
@@ -34,18 +35,11 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "crypto-js": "^4.0.0",

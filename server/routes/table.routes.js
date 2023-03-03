@@ -13,6 +13,27 @@ router.get('/getclients', async (req,res) => {
         res.status(500).json({message: `Something go wrong... ${e}`})
     }
 })
+
+router.post('/addclient', async (req,res) => {
+    try {
+        const {name, email} = req.body
+        await db.query('INSERT INTO client(name, email) VALUES($1, $2) ',
+            [name, email])
+        let number = Math.random() * (10**22 - 1  - 10**21) + 10**21
+        await db.query('INSERT INTO account(number, value, blocked) values($1, $2, $3) ',
+            [number, 0, false])
+        const lastId = await db.query('SELECT count(id) FROM client')
+        const accId = await db.query('SELECT count(id) FROM account')
+        await db.query('INSERT INTO accountclient(account_id, clinet_id) VALUES($1, $2)',
+            [accId.rows[0], lastId.rows[0]])
+
+        res.json(lastId.rows)
+
+    } catch (e) {
+        res.status(500).json({message: `Something go wrong... ${e}`})
+    }
+})
+
 router.get('/getcurrency', async (req,res) => {
     try {
         const cur = await db.query('SELECT * from currency')
@@ -57,6 +78,22 @@ router.post('/getatmsdata', async (req,res) => {
             'GROUP BY atm.id\n' +
             'ORDER BY COUNT(t.id) DESC;', [date1, date2])
         res.json(atm.rows)
+
+    } catch (e) {
+        res.status(500).json({message: `Something go wrong... ${e}`})
+    }
+})
+
+router.post('/getchart', async (req,res) => {
+    try {
+        const {date1, date2} = req.body
+        const chart = await db.query('SELECT date, SUM(value * c.exchange_ration2rub * 0.012) AS sum\n' +
+            'FROM transaction JOIN currency c on c.id = transaction.currency_id\n' +
+            'JOIN atm a on transaction.atm_id = a.id\n' +
+            'WHERE bank_name != \'Сбербанк\' AND value > 0 \n' +
+            'AND date BETWEEN ($1) AND ($2)\n' +
+            'GROUP BY date ORDER BY date;', [date1, date2])
+        res.json(chart.rows)
 
     } catch (e) {
         res.status(500).json({message: `Something go wrong... ${e}`})

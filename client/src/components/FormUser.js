@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {useMessage} from "../hooks/message.hook";
 
 export const FormUser = ({addUser}) => {
     const [value, setValue] = useState('')
@@ -20,7 +19,7 @@ export const FormUser = ({addUser}) => {
             if (validateEmail(value)){
                 addUser(value, sup)
             } else {
-                console.log("wrong email")
+                alert("Wrong email")
             }
         }
     }

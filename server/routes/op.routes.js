@@ -2,6 +2,9 @@ const {Router} = require('express')
 const db = require("../database")
 const router = Router()
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 router.post('/get', async (req,res) => {
     try {
         const date = req.body.date
@@ -32,11 +35,20 @@ router.post('/getrange', async (req,res) => {
 
 router.post('/block', async (req,res) => {
     try {
+        await db.query('BEGIN')
         const index = req.body.index
-        const ops = await db.query("UPDATE transaction SET blocked = not blocked WHERE id=($1)", [index])
-        res.json(ops.rows)
+        await db.query('LOCK TABLE transaction ')
+        const result = await db.query("SELECT id FROM transaction WHERE id=($1) FOR UPDATE nowait ", [index])
+        await sleep(1000)
+        if( result.rowCount === 0) {
+            await db.query("ROLLBACK")
+            res.json(500)
+        }
+        await db.query("UPDATE transaction SET blocked = not blocked WHERE id=($1)", [index])
+        await db.query("COMMIT")
+        res.json(100)
     } catch (e) {
-        res.status(500).json({message: 'Something go wrong...'})
+        res.status(500).json({message: `Something go wrong... ${e}`})
     }
 })
 

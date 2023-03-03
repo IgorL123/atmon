@@ -27,8 +27,9 @@ export const opRootReducer = (state = appState, action) => {
                 ops: [found].concat(state.ops.filter(op => op.id !== action.blockedOp))
 
         }
-        case GET_OPS_FAIL:
         case BLOCK_OPS_FAIL:
+            alert("Block operation fail. Try later.")
+        case GET_OPS_FAIL:
         default:
             return state
     }

@@ -1,9 +1,11 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {blockOp, } from "../actions/opAction";
+import Cookies from "js-cookie";
 
 export const List = (operations) => {
-    const isSuperUser = useSelector(state => state.auth.isSuperUser)
+    let s  = Cookies.get('superuser')
+    s = s === "true"
     const dispatch = useDispatch()
     if ( Array.isArray(operations.operations)) {
         return (
@@ -26,12 +28,13 @@ export const List = (operations) => {
                                 <th>{op.value}</th>
                                 <th>{op.name}</th>
                                 <th>{op.place}</th>
-                                {isSuperUser &&
+                                {s &&
                                     <th className="blocked"
                                         onClick={(index) => dispatch(blockOp(op.id))}>{op.blocked ? "YES" : "NO"}</th>
                                 }
-                                {!isSuperUser &&
-                                    <th className="blocked">{op.blocked ? "YES" : "NO"}</th>
+                                {!s &&
+                                    <th className="blocked" onClick={() => {alert("Access error")}}
+                                    >{op.blocked ? "YES" : "NO"}</th>
                                 }
                             </tr>
                         )

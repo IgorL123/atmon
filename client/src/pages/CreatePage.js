@@ -25,6 +25,9 @@ export const CreatePage = () => {
               <div className="sectionContainer">
                   <section className="mainSection">
                       <section className="tasksMain">
+                          <div className="row">
+
+                          </div>
                           { startTable === "transactions" &&
                               <ListOperations>
                               </ListOperations>
